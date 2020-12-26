@@ -1,0 +1,6 @@
+rootProject.name = 'papelera-project'
+include 'configuration'
+include 'product'
+include 'issuance'
+include 'account'
+
