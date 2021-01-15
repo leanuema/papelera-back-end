@@ -1,12 +1,11 @@
-package model;
+package com.papelera.papeleraproject.product.model;
 
-import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "PRODUCT_PIZZA_BOX")
-public class PizzaBoxProductModel implements Serializable {
+public class  PizzaBoxProductModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,22 +14,20 @@ public class PizzaBoxProductModel implements Serializable {
     @Column(name = "PRODUCT_DESCRIPTION")
     private String productDescription;
     @Column(name = "PRODUCT_UNIT_MEASUREMENT")
-    private String productUnity;
+    private String productUnityMeasurement;
     @Column(name = "PRODUCT_PRICE")
-    private Integer productPrice;
+    private Double productPrice;
     @Column(name = "PRODUCT_BTO")
     private String productBto;
-    @javax.persistence.Id
-    private String id;
 
     public PizzaBoxProductModel() {
     }
 
-    public PizzaBoxProductModel(Long productId, String productDescription, String productUnity
-            , Integer productPrice, String productBto) {
+    public PizzaBoxProductModel(Long productId, String productDescription, String productUnityMeasurement
+            , Double productPrice, String productBto) {
         this.productId = productId;
         this.productDescription = productDescription;
-        this.productUnity = productUnity;
+        this.productUnityMeasurement = productUnityMeasurement;
         this.productPrice = productPrice;
         this.productBto = productBto;
     }
@@ -55,18 +52,19 @@ public class PizzaBoxProductModel implements Serializable {
         this.productDescription = productDescription;
     }
 
-    public String getProductUnity() {
-        return productUnity;
+    public String getProductUnityMeasurement() {
+        return productUnityMeasurement;
     }
 
-    public void setProductUnity(String productUnity) {
-        this.productUnity = productUnity;
+    public void setProductUnityMeasurement(String productUnityMeasurement) {
+        this.productUnityMeasurement = productUnityMeasurement;
     }
-    public Integer getProductPrice() {
+
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 

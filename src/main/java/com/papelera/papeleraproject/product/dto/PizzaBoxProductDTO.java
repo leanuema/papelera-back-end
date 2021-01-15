@@ -1,4 +1,4 @@
-package dto;
+package com.papelera.papeleraproject.product.dto;
 
 import java.io.Serializable;
 
@@ -7,14 +7,14 @@ public class PizzaBoxProductDTO implements Serializable {
     private Long productId;
     private String productDescription;
     private String productUnity;
-    private Integer productPrice;
+    private Double productPrice;
     private String productBto;
 
     public PizzaBoxProductDTO() {
     }
 
     public PizzaBoxProductDTO(Long productId, String productDescription, String productUnity, String productMeasure
-            , Integer productPrice, String productBto) {
+            , Double productPrice, String productBto) {
         this.productId = productId;
         this.productDescription = productDescription;
         this.productUnity = productUnity;
@@ -49,11 +49,11 @@ public class PizzaBoxProductDTO implements Serializable {
         this.productUnity = productUnity;
     }
 
-    public Integer getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 

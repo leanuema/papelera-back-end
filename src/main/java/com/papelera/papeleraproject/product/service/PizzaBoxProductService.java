@@ -1,6 +1,7 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.PizzaBoxProductDTO;
+
+import com.papelera.papeleraproject.product.dto.PizzaBoxProductDTO;
 
 import java.util.List;
 

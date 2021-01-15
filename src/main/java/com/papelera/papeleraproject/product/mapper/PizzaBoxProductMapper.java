@@ -1,8 +1,8 @@
-package mapper;
+package com.papelera.papeleraproject.product.mapper;
 
-import dto.PizzaBoxProductDTO;
-import model.PizzaBoxProductModel;
 import org.springframework.stereotype.Component;
+import com.papelera.papeleraproject.product.dto.PizzaBoxProductDTO;
+import com.papelera.papeleraproject.product.model.PizzaBoxProductModel;
 
 @Component
 public class PizzaBoxProductMapper {
@@ -12,7 +12,7 @@ public class PizzaBoxProductMapper {
         pizzaBoxProductModel.setProductId(pizzaBoxProductDTO.getProductId());
         pizzaBoxProductModel.setProductBto(pizzaBoxProductDTO.getProductBto());
         pizzaBoxProductModel.setProductPrice(pizzaBoxProductDTO.getProductPrice());
-        pizzaBoxProductModel.setProductUnity(pizzaBoxProductDTO.getProductUnity());
+        pizzaBoxProductModel.setProductUnityMeasurement(pizzaBoxProductDTO.getProductUnity());
         pizzaBoxProductModel.setProductDescription(pizzaBoxProductDTO.getProductDescription());
         return pizzaBoxProductModel;
     }
@@ -22,9 +22,8 @@ public class PizzaBoxProductMapper {
         pizzaBoxProductDTO.setProductId(pizzaBoxProductModel.getProductId());
         pizzaBoxProductDTO.setProductBto(pizzaBoxProductModel.getProductBto());
         pizzaBoxProductDTO.setProductPrice(pizzaBoxProductModel.getProductPrice());
-        pizzaBoxProductDTO.setProductUnity(pizzaBoxProductModel.getProductUnity());
+        pizzaBoxProductDTO.setProductUnity(pizzaBoxProductModel.getProductUnityMeasurement());
         pizzaBoxProductDTO.setProductDescription(pizzaBoxProductModel.getProductDescription());
         return pizzaBoxProductDTO;
     }
-
 }
