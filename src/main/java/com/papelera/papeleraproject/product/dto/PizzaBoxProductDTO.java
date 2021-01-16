@@ -1,33 +1,20 @@
-package model;
+package com.papelera.papeleraproject.product.dto;
 
-import org.springframework.data.annotation.Id;
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "PRODUCT_PIZZA_BOX")
-public class PizzaBoxProductModel implements Serializable {
+public class PizzaBoxProductDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID", nullable = false)
     private Long productId;
-    @Column(name = "PRODUCT_DESCRIPTION")
     private String productDescription;
-    @Column(name = "PRODUCT_UNIT_MEASUREMENT")
     private String productUnity;
-    @Column(name = "PRODUCT_PRICE")
-    private Integer productPrice;
-    @Column(name = "PRODUCT_BTO")
+    private Double productPrice;
     private String productBto;
-    @javax.persistence.Id
-    private String id;
 
-    public PizzaBoxProductModel() {
+    public PizzaBoxProductDTO() {
     }
 
-    public PizzaBoxProductModel(Long productId, String productDescription, String productUnity
-            , Integer productPrice, String productBto) {
+    public PizzaBoxProductDTO(Long productId, String productDescription, String productUnity, String productMeasure
+            , Double productPrice, String productBto) {
         this.productId = productId;
         this.productDescription = productDescription;
         this.productUnity = productUnity;
@@ -35,10 +22,10 @@ public class PizzaBoxProductModel implements Serializable {
         this.productBto = productBto;
     }
 
-
     /**
      * Getter and Setter
-     */
+     **/
+
     public Long getProductId() {
         return productId;
     }
@@ -62,11 +49,12 @@ public class PizzaBoxProductModel implements Serializable {
     public void setProductUnity(String productUnity) {
         this.productUnity = productUnity;
     }
-    public Integer getProductPrice() {
+
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -77,4 +65,9 @@ public class PizzaBoxProductModel implements Serializable {
     public void setProductBto(String productBto) {
         this.productBto = productBto;
     }
+
+
+
+
 }
+
