@@ -24,7 +24,8 @@ public class PizzaBoxProductDTO implements Serializable {
 
     /**
      * Getter and Setter
-     */
+     **/
+
     public Long getProductId() {
         return productId;
     }
@@ -64,4 +65,9 @@ public class PizzaBoxProductDTO implements Serializable {
     public void setProductBto(String productBto) {
         this.productBto = productBto;
     }
+
+
+
+
 }
+
