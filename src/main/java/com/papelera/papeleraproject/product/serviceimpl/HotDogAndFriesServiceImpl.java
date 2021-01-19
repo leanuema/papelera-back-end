@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.HotDogAndFriesTrayDTO;
-import dto.MiscellaneousDTO;
-import service.HotDogAndFriesService;
+import com.papelera.papeleraproject.product.dto.HotDogAndFriesTrayDTO;
+import com.papelera.papeleraproject.product.service.HotDogAndFriesService;
 
 import java.util.LinkedList;
 import java.util.List;

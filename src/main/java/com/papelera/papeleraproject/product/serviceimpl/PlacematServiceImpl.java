@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.MiscellaneousDTO;
-import dto.PlacematDTO;
-import service.PlacematService;
+import com.papelera.papeleraproject.product.dto.PlacematDTO;
+import com.papelera.papeleraproject.product.service.PlacematService;
 
 import java.util.LinkedList;
 import java.util.List;

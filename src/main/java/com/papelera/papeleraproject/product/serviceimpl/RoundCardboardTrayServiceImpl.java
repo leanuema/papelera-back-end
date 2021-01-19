@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-
-import dto.RoundCardboardTrayDTO;
-import service.RoundCardboardTrayService;
+import com.papelera.papeleraproject.product.dto.RoundCardboardTrayDTO;
+import com.papelera.papeleraproject.product.service.RoundCardboardTrayService;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.PizzaBoxDto;
-import dto.RavioliBoxDTO;
-import service.RavioliBoxService;
+import com.papelera.papeleraproject.product.dto.RavioliBoxDTO;
+import com.papelera.papeleraproject.product.service.RavioliBoxService;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.HotDogAndFriesTrayDTO;
+import com.papelera.papeleraproject.product.dto.HotDogAndFriesTrayDTO;
 
 import java.util.List;
 

@@ -22,6 +22,7 @@ public class PizzaBoxProductDTO implements Serializable {
         this.productBto = productBto;
     }
 
+
     /**
      * Getter and Setter
      **/

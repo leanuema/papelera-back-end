@@ -1,7 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.EconomicRectCardboardTrayDTO;
-import service.EconomicRectCardboardTrayService;
+import com.papelera.papeleraproject.product.dto.EconomicRectCardboardTrayDTO;
+import com.papelera.papeleraproject.product.service.EconomicRectCardboardTrayService;
 
 import java.util.LinkedList;
 import java.util.List;

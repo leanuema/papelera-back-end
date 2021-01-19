@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.SatinBaseDTO;
+import com.papelera.papeleraproject.product.dto.SatinBaseDTO;
 
 import java.util.List;
 

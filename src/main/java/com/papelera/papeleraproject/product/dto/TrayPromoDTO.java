@@ -1,7 +1,6 @@
-package dto;
+package com.papelera.papeleraproject.product.dto;
 
 public class TrayPromoDTO {
-
 
     public Long id;
     public String productDescription;

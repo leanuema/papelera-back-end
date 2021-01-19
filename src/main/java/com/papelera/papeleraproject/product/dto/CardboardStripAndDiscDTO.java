@@ -1,8 +1,6 @@
-package dto;
+package com.papelera.papeleraproject.product.dto;
 
 public class CardboardStripAndDiscDTO {
-
-
 
     public Long id;
     public String productDescription;

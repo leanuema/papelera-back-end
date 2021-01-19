@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.EmpanadaBoxDTO;
+import com.papelera.papeleraproject.product.dto.EmpanadaBoxDTO;
 
 import java.util.List;
 

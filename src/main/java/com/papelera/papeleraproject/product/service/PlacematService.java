@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.PlacematDTO;
+import com.papelera.papeleraproject.product.dto.PlacematDTO;
 
 import java.util.List;
 

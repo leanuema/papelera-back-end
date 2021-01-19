@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.MiscellaneousDTO;
+import com.papelera.papeleraproject.product.dto.MiscellaneousDTO;
 
 import java.util.List;
 

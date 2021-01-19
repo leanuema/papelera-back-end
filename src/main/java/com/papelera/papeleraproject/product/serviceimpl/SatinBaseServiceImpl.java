@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.HotDogAndFriesTrayDTO;
-import dto.SatinBaseDTO;
-import service.SatinBaseService;
+import com.papelera.papeleraproject.product.dto.SatinBaseDTO;
+import com.papelera.papeleraproject.product.service.SatinBaseService;
 
 import java.util.LinkedList;
 import java.util.List;

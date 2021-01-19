@@ -1,8 +1,8 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.CardboardStripAndDiscDTO;
-import dto.HotDogAndFriesTrayDTO;
-import service.CardboardStripAndDiscService;
+
+import com.papelera.papeleraproject.product.dto.CardboardStripAndDiscDTO;
+import com.papelera.papeleraproject.product.service.CardboardStripAndDiscService;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,8 +1,7 @@
-package serviceimpl;
+package com.papelera.papeleraproject.product.serviceimpl;
 
-import dto.TrayPromoDTO;
-import service.TrayPromoService;
-
+import com.papelera.papeleraproject.product.dto.TrayPromoDTO;
+import com.papelera.papeleraproject.product.service.TrayPromoService;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class TrayPromoServiceImpl implements TrayPromoService {
         productList.add(product4);
         productList.add(product5);
 
-
         return productList;
     }
+
 }

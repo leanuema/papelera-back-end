@@ -1,7 +1,6 @@
-package dto;
+package com.papelera.papeleraproject.product.dto;
 
 public class RavioliBoxDTO {
-
 
     public Long id;
     public String productDescription;

@@ -1,6 +1,6 @@
-package service;
+package com.papelera.papeleraproject.product.service;
 
-import dto.RavioliBoxDTO;
+import com.papelera.papeleraproject.product.dto.RavioliBoxDTO;
 
 import java.util.List;
 
