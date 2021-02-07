@@ -11,25 +11,24 @@ public class  PizzaBoxProductModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID", nullable = false)
     private Long productId;
-    @Column(name = "PRODUCT_DESCRIPTION")
-    private String productDescription;
-    @Column(name = "PRODUCT_UNIT_MEASUREMENT")
-    private String productUnityMeasurement;
-    @Column(name = "PRODUCT_PRICE")
-    private Double productPrice;
-    @Column(name = "PRODUCT_BTO")
-    private String productBto;
+    @Column(name = "PRODUCT_NAME")
+    private String productName;
+    @Column(name = "PRODUCT_QUANTITY_PRICE")
+    private Double productQuantityPrice;
+    @Column(name = "PRODUCT_UNIT_PRICE")
+    private Double productUnitPrice;
+    @Column(name = "STATUS_ID")
+    private Integer productStatusId;
 
     public PizzaBoxProductModel() {
     }
 
-    public PizzaBoxProductModel(Long productId, String productDescription, String productUnityMeasurement
-            , Double productPrice, String productBto) {
+    public PizzaBoxProductModel(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId) {
         this.productId = productId;
-        this.productDescription = productDescription;
-        this.productUnityMeasurement = productUnityMeasurement;
-        this.productPrice = productPrice;
-        this.productBto = productBto;
+        this.productName = productName;
+        this.productQuantityPrice = productQuantityPrice;
+        this.productUnitPrice = productUnitPrice;
+        this.productStatusId = productStatusId;
     }
 
 
@@ -44,35 +43,35 @@ public class  PizzaBoxProductModel implements Serializable {
         this.productId = productId;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProductUnityMeasurement() {
-        return productUnityMeasurement;
+    public Double getProductQuantityPrice() {
+        return productQuantityPrice;
     }
 
-    public void setProductUnityMeasurement(String productUnityMeasurement) {
-        this.productUnityMeasurement = productUnityMeasurement;
+    public void setProductQuantityPrice(Double productQuantityPrice) {
+        this.productQuantityPrice = productQuantityPrice;
     }
 
-    public Double getProductPrice() {
-        return productPrice;
+    public Double getProductUnitPrice() {
+        return productUnitPrice;
     }
 
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
+    public void setProductUnitPrice(Double productUnitPrice) {
+        this.productUnitPrice = productUnitPrice;
     }
 
-    public String getProductBto() {
-        return productBto;
+    public Integer getProductStatusId() {
+        return productStatusId;
     }
 
-    public void setProductBto(String productBto) {
-        this.productBto = productBto;
+    public void setProductStatusId(Integer productStatusId) {
+        this.productStatusId = productStatusId;
     }
 }

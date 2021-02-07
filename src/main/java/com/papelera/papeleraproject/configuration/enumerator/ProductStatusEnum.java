@@ -2,13 +2,13 @@ package com.papelera.papeleraproject.configuration.enumerator;
 
 public enum ProductStatusEnum {
 
-    STOCK_AVAILABLE(1L, "STOCK_AVAILABLE"),
-    STOCK_UNAVAILABLE(2L, "STOCK_UNAVAILABLE");
+    STOCK_UNAVAILABLE(0, "STOCK_UNAVAILABLE"),
+    STOCK_AVAILABLE(1, "STOCK_AVAILABLE");
 
-    private Long id;
+    private Integer id;
     private String description;
 
-    ProductStatusEnum(Long id, String description) {
+    ProductStatusEnum(Integer id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -17,11 +17,11 @@ public enum ProductStatusEnum {
     /**
      *Getter and Setter
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
