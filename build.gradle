@@ -26,5 +26,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-sourceCompatibility = 11
