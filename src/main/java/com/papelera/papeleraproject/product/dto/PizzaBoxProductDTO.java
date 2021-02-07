@@ -5,28 +5,26 @@ import java.io.Serializable;
 public class PizzaBoxProductDTO implements Serializable {
 
     private Long productId;
-    private String productDescription;
-    private String productUnity;
-    private Double productPrice;
-    private String productBto;
+    private String productName;
+    private Double productQuantityPrice;
+    private Double productUnitPrice;
+    private Integer productStatusId;
 
     public PizzaBoxProductDTO() {
     }
 
-    public PizzaBoxProductDTO(Long productId, String productDescription, String productUnity, String productMeasure
-            , Double productPrice, String productBto) {
+    public PizzaBoxProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId) {
         this.productId = productId;
-        this.productDescription = productDescription;
-        this.productUnity = productUnity;
-        this.productPrice = productPrice;
-        this.productBto = productBto;
+        this.productName = productName;
+        this.productQuantityPrice = productQuantityPrice;
+        this.productUnitPrice = productUnitPrice;
+        this.productStatusId = productStatusId;
     }
 
 
     /**
      * Getter and Setter
      **/
-
     public Long getProductId() {
         return productId;
     }
@@ -35,40 +33,36 @@ public class PizzaBoxProductDTO implements Serializable {
         this.productId = productId;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProductUnity() {
-        return productUnity;
+    public Double getProductQuantityPrice() {
+        return productQuantityPrice;
     }
 
-    public void setProductUnity(String productUnity) {
-        this.productUnity = productUnity;
+    public void setProductQuantityPrice(Double productQuantityPrice) {
+        this.productQuantityPrice = productQuantityPrice;
     }
 
-    public Double getProductPrice() {
-        return productPrice;
+    public Double getProductUnitPrice() {
+        return productUnitPrice;
     }
 
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
+    public void setProductUnitPrice(Double productUnitPrice) {
+        this.productUnitPrice = productUnitPrice;
     }
 
-    public String getProductBto() {
-        return productBto;
+    public Integer getProductStatusId() {
+        return productStatusId;
     }
 
-    public void setProductBto(String productBto) {
-        this.productBto = productBto;
+    public void setProductStatusId(Integer productStatusId) {
+        this.productStatusId = productStatusId;
     }
-
-
-
-
 }
 
