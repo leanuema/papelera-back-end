@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CardboardProductEndPoint {
 
-    String BASE = "/v1";
+    String BASE_URL = "/cardboard-product";
     String GET_ALL_CARDBOARD_BOX_PRODUCT = "/get-all-cardboard-product";
     String GET_PRODUCT_BY_STATUS = "/get-product-by-status";
     String MODIFY_PRODUCT = "/modify-product";

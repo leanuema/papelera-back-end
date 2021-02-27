@@ -11,7 +11,7 @@ import com.papelera.papeleraproject.product.service.CardboardProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = CardboardProductEndPoint.BASE)
+@RequestMapping(value = CardboardProductEndPoint.BASE_URL)
 public class CardboardProductResource implements CardboardProductEndPoint {
 
     @Autowired
@@ -38,7 +38,7 @@ public class CardboardProductResource implements CardboardProductEndPoint {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public CardboardProductDTO modifyProduct(@RequestBody CardboardProductDTO cardboardProductDTO) throws Exception {
-        return cardboardProductService.modifyProduct(cardboardProductDTO);
+        return /*cardboardProductService.modifyProduct(cardboardProductDTO)*/null;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class AluminumProductServiceImpl implements AluminumProductService {
     private AluminumProductMapper aluminumProductMapper;
 
     @Override
-    public List<AluminumProductDTO> getAllCardboardProduct() throws Exception {
+    public List<AluminumProductDTO> getAllProducts() throws Exception {
         logger.log(Level.INFO, "Find all product");
         return aluminumProductModelService.getAllProduct().stream().map(aluminumProductModel ->
                 aluminumProductMapper.toDTO(aluminumProductModel)).collect(Collectors.toList());

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class CardboardProductDTO implements Serializable {
 
-
-
     private Long productId;
     private String productName;
     private Double productQuantityPrice;

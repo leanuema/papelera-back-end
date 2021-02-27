@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class PlasticProductServiceImpl implements PlasticProductModelService {
+public class PlasticProductModelServiceImpl implements PlasticProductModelService {
 
-    private final Logger logger = Logger.getLogger(PlasticProductServiceImpl.class.getName());
+    private final Logger logger = Logger.getLogger(PlasticProductModelServiceImpl.class.getName());
 
     @Autowired
     private PlasticProductRepository plasticProductRepository;
