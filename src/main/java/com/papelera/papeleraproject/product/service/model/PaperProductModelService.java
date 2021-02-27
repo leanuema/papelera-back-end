@@ -1,20 +1,20 @@
 package com.papelera.papeleraproject.product.service.model;
 
-import com.papelera.papeleraproject.product.model.PaperProductDTO;
+import com.papelera.papeleraproject.product.model.PaperProductModel;
 
 import java.util.List;
 
 public interface PaperProductModelService {
 
-    List<PaperProductDTO> getAllProduct() throws Exception;
+    List<PaperProductModel> getAllProduct() throws Exception;
 
-    PaperProductDTO findByProductId(Long productId) throws Exception;
+    PaperProductModel findByProductId(Long productId) throws Exception;
 
-    List<PaperProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
+    List<PaperProductModel> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    PaperProductDTO modifyProduct(PaperProductDTO paperProductModel) throws Exception;
+    PaperProductModel modifyProduct(PaperProductModel paperProductModel) throws Exception;
 
-    void createProduct(PaperProductDTO paperProductModel) throws Exception;
+    void createProduct(PaperProductModel paperProductModel) throws Exception;
 
-    List<PaperProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
+    List<PaperProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 }

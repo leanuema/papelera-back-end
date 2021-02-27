@@ -28,9 +28,9 @@ public class CardboardProductServiceImpl implements CardboardProductService {
 
     @Override
     public List<CardboardProductDTO> getAllCardboardProduct() throws Exception {
-        logger.log(Level.INFO, "Find all pizza box product");
-        return cardboardProductModelService.getAllCardboardProduct().stream().map(pizzaBoxProductModel ->
-                cardboardProductMapper.toDTO(pizzaBoxProductModel)).collect(Collectors.toList());
+        logger.log(Level.INFO, "Find all product");
+        return cardboardProductModelService.getAllCardboardProduct().stream().map(cardboardProductModel ->
+                cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
     }
 
     @Override
@@ -39,8 +39,8 @@ public class CardboardProductServiceImpl implements CardboardProductService {
         logger.log(Level.INFO, "Searching products by status");
         try {
             cardboardProductDTOList = cardboardProductModelService.getProductByStatusId(statusId)
-                    .stream().map(pizzaBoxProductModel -> cardboardProductMapper
-                            .toDTO(pizzaBoxProductModel)).collect(Collectors.toList());
+                    .stream().map(cardboardProductDTO -> cardboardProductMapper
+                            .toDTO(cardboardProductDTO)).collect(Collectors.toList());
             for (CardboardProductDTO cardboardProductDTO : cardboardProductDTOList) {
                 if (cardboardProductDTO.getProductStatusId() != null
                         && !cardboardProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
@@ -57,11 +57,9 @@ public class CardboardProductServiceImpl implements CardboardProductService {
 
     @Transactional
     @Override
-    public CardboardProductDTO modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
+    public CardboardProductModel modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        CardboardProductModel cardboardProductModel = cardboardProductModelService
-                .modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
-        return cardboardProductMapper.toDTO(cardboardProductModel);
+        return cardboardProductModelService.modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
     }
 
     @Transactional
@@ -69,6 +67,12 @@ public class CardboardProductServiceImpl implements CardboardProductService {
     public void createProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to create product");
         cardboardProductModelService.createProduct(cardboardProductMapper.toModel(cardboardProductDTO));
+    }
+
+    @Override
+    public List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
+        logger.log(Level.INFO, "Searching products by featured status");
+        return null;
     }
 
 }

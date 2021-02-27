@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "PAPER_PRODUCT")
-public class PaperProductDTO implements Serializable {
+public class PaperProductModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class PaperProductDTO implements Serializable {
     @Column(name = "FEATURED_ID")
     private Long featuredStatusId;
 
-    public PaperProductDTO() {
+    public PaperProductModel() {
     }
 
-    public PaperProductDTO(Long productId, String productName, Double productQuantityPrice,
-                           Double productUnitPrice, Integer productStatusId, Long featuredStatusId) {
+    public PaperProductModel(Long productId, String productName, Double productQuantityPrice,
+                             Double productUnitPrice, Integer productStatusId, Long featuredStatusId) {
         this.productId = productId;
         this.productName = productName;
         this.productQuantityPrice = productQuantityPrice;
