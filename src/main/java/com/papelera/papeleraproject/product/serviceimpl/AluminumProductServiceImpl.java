@@ -34,7 +34,7 @@ public class AluminumProductServiceImpl implements AluminumProductService {
 
     @Override
     public AluminumProductDTO findByProductId(Long productId) throws Exception {
-        return null;
+        return aluminumProductMapper.toDTO(aluminumProductModelService.findByProductId(productId));
     }
 
     @Override
@@ -74,6 +74,7 @@ public class AluminumProductServiceImpl implements AluminumProductService {
     @Override
     public List<AluminumProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "Searching products by status");
-        return null;
+        return aluminumProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(aluminumProductModel ->
+                aluminumProductMapper.toDTO(aluminumProductModel)).collect(Collectors.toList());
     }
 }

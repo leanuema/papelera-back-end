@@ -12,6 +12,7 @@ import com.papelera.papeleraproject.product.service.CardboardProductService;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -31,6 +32,13 @@ public class CardboardProductServiceImpl implements CardboardProductService {
         logger.log(Level.INFO, "Find all product");
         return cardboardProductModelService.getAllCardboardProduct().stream().map(cardboardProductModel ->
                 cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CardboardProductDTO findByProductId(Long productId) throws Exception {
+        logger.log(Level.INFO, "Find CardBoard product by ID");
+
+        return cardboardProductMapper.toDTO(cardboardProductModelService.findByProductId(productId));
     }
 
     @Override
@@ -72,7 +80,9 @@ public class CardboardProductServiceImpl implements CardboardProductService {
     @Override
     public List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "Searching products by featured status");
-        return null;
+        return cardboardProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(cardboardProductModel ->
+               cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
+
     }
 
 }

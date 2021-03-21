@@ -9,6 +9,8 @@ public interface CardboardProductService {
 
     List<CardboardProductDTO> getAllCardboardProduct() throws Exception;
 
+    CardboardProductDTO findByProductId(Long productId) throws Exception;
+
     List<CardboardProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
     CardboardProductModel modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception;

@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.product.resource;
 
+import com.papelera.papeleraproject.product.model.CardboardProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +26,8 @@ public class CardboardProductResource implements CardboardProductEndPoint {
         return cardboardProductService.getAllCardboardProduct();
     }
 
+
+
     @Override
     @GetMapping(value = CardboardProductEndPoint.GET_PRODUCT_BY_STATUS,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,6 +50,21 @@ public class CardboardProductResource implements CardboardProductEndPoint {
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody CardboardProductDTO cardboardProductDTO) throws Exception {
         cardboardProductService.createProduct(cardboardProductDTO);
+    }
+
+    @Override
+    @GetMapping(value = CardboardProductEndPoint.GET_CARDBOARD_PRODUCT_BY_ID,
+                 produces = MediaType.APPLICATION_JSON_VALUE)
+
+    public CardboardProductDTO findByProductId(@RequestParam("productId")Long productId) throws Exception {
+        return cardboardProductService.findByProductId(productId);
+    }
+
+    @Override
+    @GetMapping(value = CardboardProductEndPoint.GET_CARDBOARD_PRODUCT_BY_FEATURED_STATUS,
+                 produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CardboardProductDTO> findProductByFeaturedStatusId(@RequestParam("featuredId")Long featuredId) throws Exception {
+        return cardboardProductService.findProductByFeaturedStatusId(featuredId);
     }
 
 }

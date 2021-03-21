@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PaperProductModelService {
 
-    List<PaperProductModel> getAllProduct() throws Exception;
+    List<PaperProductModel> getAllPaperProduct() throws Exception;
 
     PaperProductModel findByProductId(Long productId) throws Exception;
 

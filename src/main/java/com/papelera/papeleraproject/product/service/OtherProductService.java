@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OtherProductService {
 
-    List<OtherProductDTO> getAllCardboardProduct() throws Exception;
+    List<OtherProductDTO> getAllOtherProduct() throws Exception;
 
     OtherProductDTO findByProductId(Long productId) throws Exception;
 

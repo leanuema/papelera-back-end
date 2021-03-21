@@ -9,7 +9,7 @@ public class OtherProductModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID", nullable = false)
+    @Column(name = "PRODUCT_ID", nullable =  false)
     private Long productId;
     @Column(name = "PRODUCT_NAME")
     private String productName;

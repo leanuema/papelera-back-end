@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface PaperProductService {
 
-    List<PaperProductDTO> getAllCardboardProduct() throws Exception;
+    List<PaperProductDTO> getAllPaperProduct() throws Exception;
 
     PaperProductDTO findByProductId(Long productId) throws Exception;
 
     List<PaperProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    PaperProductModel modifyProduct(PaperProductModel paperProductModel) throws Exception;
+    PaperProductModel modifyProduct(PaperProductDTO paperProductDTO) throws Exception;
 
-    void createProduct(PaperProductModel paperProductModel) throws Exception;
+    void createProduct(PaperProductDTO paperProductDTO) throws Exception;
 
     List<PaperProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 }

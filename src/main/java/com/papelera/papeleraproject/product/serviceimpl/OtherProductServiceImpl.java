@@ -9,6 +9,7 @@ import com.papelera.papeleraproject.product.service.model.OtherProductModelServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,7 +27,7 @@ public class OtherProductServiceImpl implements OtherProductService {
     private OtherProductMapper otherProductMapper;
 
     @Override
-    public List<OtherProductDTO> getAllCardboardProduct() throws Exception {
+    public List<OtherProductDTO> getAllOtherProduct() throws Exception {
         logger.log(Level.INFO, "Find all product");
         return otherProductModelService.getAllProduct().stream().map(otherProductModel ->
                 otherProductMapper.toDTO(otherProductModel)).collect(Collectors.toList());
@@ -34,7 +35,7 @@ public class OtherProductServiceImpl implements OtherProductService {
 
     @Override
     public OtherProductDTO findByProductId(Long productId) throws Exception {
-        return null;
+        return otherProductMapper.toDTO(otherProductModelService.findByProductId(productId));
     }
 
     @Override
@@ -59,12 +60,14 @@ public class OtherProductServiceImpl implements OtherProductService {
         return otherProductDTOList;
     }
 
+    @Transactional
     @Override
     public OtherProductModel modifyProduct(OtherProductDTO otherProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
         return otherProductModelService.modifyProduct(otherProductMapper.toModel(otherProductDTO));
     }
 
+    @Transactional
     @Override
     public void createProduct(OtherProductDTO otherProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to create product");
@@ -74,6 +77,7 @@ public class OtherProductServiceImpl implements OtherProductService {
     @Override
     public List<OtherProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "Searching products by status");
-        return null;
+        return otherProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(otherProductModel ->
+                otherProductMapper.toDTO(otherProductModel)).collect(Collectors.toList());
     }
 }

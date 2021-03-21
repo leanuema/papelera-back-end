@@ -14,6 +14,6 @@ public interface AluminumProductRepository extends JpaRepository<AluminumProduct
     List<AluminumProductModel> findProductByStatusId(@Param("statusId") Integer statusId);
 
     @Query(value = "SELECT cp.PRODUCT_ID, cp.PRODUCT_NAME, cp.PRODUCT_QUANTITY_PRICE, cp.PRODUCT_UNIT_PRICE, cp.STATUS_ID, cp.FEATURED_ID " +
-            "FROM ALUMINUM_PRODUCT cp WHERE cp.STATUS_ID = :featuredId", nativeQuery = true)
+            "FROM ALUMINUM_PRODUCT cp WHERE cp.FEATURED_ID = :featuredId", nativeQuery = true)
     List<AluminumProductModel> findProductByFeaturedStatusId(@Param("featuredId") Long statusId);
 }

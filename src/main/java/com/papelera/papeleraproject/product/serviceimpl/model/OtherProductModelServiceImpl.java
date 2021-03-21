@@ -6,6 +6,7 @@ import com.papelera.papeleraproject.product.service.model.OtherProductModelServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,12 +37,14 @@ public class OtherProductModelServiceImpl implements OtherProductModelService {
         return otherProductRepository.findProductByStatusId(statusId);
     }
 
+    @Transactional
     @Override
     public OtherProductModel modifyProduct(OtherProductModel otherProductModel) throws Exception {
         logger.log(Level.INFO, "modifying data to data base.");
         return otherProductRepository.save(otherProductModel);
     }
 
+    @Transactional
     @Override
     public void createProduct(OtherProductModel otherProductModel) throws Exception {
         logger.log(Level.INFO, "creating product");
