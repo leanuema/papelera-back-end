@@ -1,5 +1,7 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
+import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
+import com.papelera.papeleraproject.product.dto.CardboardProductDTO;
 import com.papelera.papeleraproject.product.dto.PaperProductDTO;
 import com.papelera.papeleraproject.product.mapper.PaperProductMapper;
 import com.papelera.papeleraproject.product.model.PaperProductModel;
@@ -8,10 +10,17 @@ import com.papelera.papeleraproject.product.service.model.PaperProductModelServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class PaperProductServiceImpl implements PaperProductService {
+
+    private final Logger logger = Logger.getLogger(PaperProductServiceImpl.class.getName());
 
     @Autowired
     private PaperProductModelService paperProductModelService;
@@ -19,32 +28,58 @@ public class PaperProductServiceImpl implements PaperProductService {
     private PaperProductMapper paperProductMapper;
 
     @Override
-    public List<PaperProductDTO> getAllCardboardProduct() throws Exception {
-        return null;
+    public List<PaperProductDTO> getAllPaperProduct() throws Exception {
+        logger.log(Level.INFO,"Find all product");
+        return paperProductModelService.getAllPaperProduct().stream().map(paperProductModel ->
+                paperProductMapper.toDTO(paperProductModel)).collect(Collectors.toList());
     }
 
     @Override
     public PaperProductDTO findByProductId(Long productId) throws Exception {
-        return null;
+        logger.log(Level.INFO, "Find Paper product by ID");
+        return paperProductMapper.toDTO(paperProductModelService.findByProductId(productId));
     }
 
     @Override
     public List<PaperProductDTO> getStockAvailableProducts(Integer statusId) throws Exception {
-        return null;
+        List<PaperProductDTO> paperProductDTOList;
+        logger.log(Level.INFO, "Searching products by status");
+        try {
+            paperProductDTOList = paperProductModelService.getStockAvailableProducts(statusId)
+                    .stream().map(paperProductDTO -> paperProductMapper
+                            .toDTO(paperProductDTO)).collect(Collectors.toList());
+            for (PaperProductDTO paperProductDTO : paperProductDTOList) {
+                if (paperProductDTO.getProductStatusId() != null
+                        && !paperProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
+                        && !paperProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+                    paperProductDTOList = new ArrayList<>();
+                    logger.log(Level.SEVERE, "There is not stock type available for the product");
+                }
+            }
+        } catch (Exception e) {
+            throw new Exception("Could not retrieve value from database " + e);
+        }
+        return paperProductDTOList;
+    }
+
+    @Transactional
+    @Override
+    public PaperProductModel modifyProduct(PaperProductDTO paperProductDTO) throws Exception {
+        logger.log(Level.INFO, "begin of method to save product");
+        return paperProductModelService.modifyProduct(paperProductMapper.toModel(paperProductDTO));
     }
 
     @Override
-    public PaperProductModel modifyProduct(PaperProductModel paperProductDTO) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void createProduct(PaperProductModel paperProductDTO) throws Exception {
+    public void createProduct(PaperProductDTO paperProductDTO) throws Exception {
+        logger.log(Level.INFO, "begin of method to create product");
+        paperProductModelService.createProduct(paperProductMapper.toModel(paperProductDTO));
 
     }
 
     @Override
     public List<PaperProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
-        return null;
+        logger.log(Level.INFO, "Searching products by featured status");
+        return paperProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(paperProductModel ->
+                paperProductMapper.toDTO(paperProductModel)).collect(Collectors.toList());
     }
 }

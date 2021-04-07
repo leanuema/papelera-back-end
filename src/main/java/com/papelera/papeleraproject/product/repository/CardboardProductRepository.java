@@ -14,6 +14,6 @@ public interface CardboardProductRepository extends JpaRepository<CardboardProdu
     List<CardboardProductModel> findProductByStatusId(@Param("statusId") Integer statusId);
 
     @Query(value = "SELECT cp.PRODUCT_ID, cp.PRODUCT_NAME, cp.PRODUCT_QUANTITY_PRICE, cp.PRODUCT_UNIT_PRICE, cp.STATUS_ID, cp.FEATURED_ID " +
-            "FROM CARDBOARD_PRODUCT cp WHERE cp.STATUS_ID = :featuredId", nativeQuery = true)
-    List<CardboardProductModel> findProductByFeaturedStatusId(@Param("featuredId") Long statusId);
+            "FROM CARDBOARD_PRODUCT cp WHERE cp.FEATURED_ID = :featuredId", nativeQuery = true)
+    List<CardboardProductModel> findProductByFeaturedStatusId(@Param("featuredId") Long featuredId);
 }

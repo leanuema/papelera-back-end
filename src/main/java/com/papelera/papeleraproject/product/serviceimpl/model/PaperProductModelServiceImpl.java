@@ -19,7 +19,7 @@ public class PaperProductModelServiceImpl implements PaperProductModelService {
     private PaperProductRepository paperProductRepository;
 
     @Override
-    public List<PaperProductModel> getAllProduct() throws Exception {
+    public List<PaperProductModel> getAllPaperProduct() throws Exception {
         logger.log(Level.INFO, "searching all products from data base.");
         return paperProductRepository.findAll();
     }
