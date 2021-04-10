@@ -13,7 +13,7 @@ public interface OtherProductService {
 
     List<OtherProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    OtherProductModel modifyProduct(OtherProductDTO otherProductDTO) throws Exception;
+    void modifyProduct(OtherProductDTO otherProductDTO) throws Exception;
 
     void createProduct(OtherProductDTO otherProductDTO) throws Exception;
 

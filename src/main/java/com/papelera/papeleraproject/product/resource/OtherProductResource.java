@@ -42,8 +42,8 @@ public class OtherProductResource implements OtherProductEndPoint {
     @Override
     @PutMapping(value = OtherProductEndPoint.MODIFY_PRODUCT,
     produces = MediaType.APPLICATION_JSON_VALUE)
-    public OtherProductDTO modifyProduct(OtherProductDTO otherProductDTO) throws Exception {
-        return null;
+    public void modifyProduct(OtherProductDTO otherProductDTO) throws Exception {
+        otherProductService.modifyProduct(otherProductDTO);
     }
 
     @Override

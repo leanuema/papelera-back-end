@@ -1,7 +1,6 @@
 package com.papelera.papeleraproject.product.service;
 
 import com.papelera.papeleraproject.product.dto.PlasticProductDTO;
-import com.papelera.papeleraproject.product.model.PlasticProductModel;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface PlasticProductService {
 
     List<PlasticProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    PlasticProductModel modifyProduct(PlasticProductDTO plasticProductModel) throws Exception;
+    void modifyProduct(PlasticProductDTO plasticProductModel) throws Exception;
 
     void createProduct(PlasticProductDTO plasticProductModel) throws Exception;
 

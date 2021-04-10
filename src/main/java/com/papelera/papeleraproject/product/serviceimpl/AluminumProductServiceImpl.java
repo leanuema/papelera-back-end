@@ -60,9 +60,14 @@ public class AluminumProductServiceImpl implements AluminumProductService {
     }
 
     @Override
-    public AluminumProductModel modifyProduct(AluminumProductDTO aluminumProductDTO) throws Exception {
+    public void modifyProduct(AluminumProductDTO aluminumProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        return aluminumProductModelService.modifyProduct(aluminumProductMapper.toModel(aluminumProductDTO));
+        if (aluminumProductModelService.findByProductId(aluminumProductDTO.getProductId()) == null) {
+            logger.log(Level.SEVERE, "There is not product with this id: " + aluminumProductDTO.getProductId());
+        } else {
+            logger.log(Level.INFO, "modify product to: " + aluminumProductDTO);
+            aluminumProductModelService.modifyProduct(aluminumProductMapper.toModel(aluminumProductDTO));
+        }
     }
 
     @Override

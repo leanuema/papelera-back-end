@@ -25,12 +25,21 @@ public class CardboardProductRestService implements CardboardProductEndPoint {
     }
 
     @Override
-    public CardboardProductDTO modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
+    public void modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
+    }
+
+    @Override
+    public void createProduct(CardboardProductDTO cardboardProductDTO, Long productId) throws Exception {
+
+    }
+
+    @Override
+    public CardboardProductDTO findByProductId(Long productId) throws Exception {
         return null;
     }
 
     @Override
-    public void createProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
-
+    public List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
+        return null;
     }
 }

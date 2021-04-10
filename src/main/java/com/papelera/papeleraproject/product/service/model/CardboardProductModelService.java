@@ -13,9 +13,9 @@ public interface CardboardProductModelService {
 
     List<CardboardProductModel> getProductByStatusId(Integer statusId) throws Exception;
 
-    CardboardProductModel modifyProduct(CardboardProductModel cardboardProductModel) throws Exception;
+    void modifyProduct(CardboardProductModel cardboardProductModel) throws Exception;
 
-    void createProduct(CardboardProductModel cardboardProductModel) throws Exception;
+    void createProduct(CardboardProductModel cardboardProductModel, Long productId) throws Exception;
 
     List<CardboardProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 

@@ -62,9 +62,14 @@ public class OtherProductServiceImpl implements OtherProductService {
 
     @Transactional
     @Override
-    public OtherProductModel modifyProduct(OtherProductDTO otherProductDTO) throws Exception {
+    public void modifyProduct(OtherProductDTO otherProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        return otherProductModelService.modifyProduct(otherProductMapper.toModel(otherProductDTO));
+        if (otherProductModelService.findByProductId(otherProductDTO.getProductId()) == null) {
+            logger.log(Level.SEVERE, "There is not product with this id: " + otherProductDTO.getProductId());
+        } else {
+            logger.log(Level.INFO, "modify product to: " + otherProductDTO);
+            otherProductModelService.modifyProduct(otherProductMapper.toModel(otherProductDTO));
+        }
     }
 
     @Transactional

@@ -44,8 +44,8 @@ public class AluminumProductResource implements AluminumProductEndPoint {
     @Override
     @PutMapping (value = AluminumProductEndPoint.MODIFY_PRODUCT
     ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public AluminumProductModel modifyProduct(@RequestBody AluminumProductDTO aluminumProductDTO) throws Exception {
-        return /*aluminumProductService.modifyProduct(aluminumProductDTO)*/ null;
+    public void modifyProduct(@RequestBody AluminumProductDTO aluminumProductDTO) throws Exception {
+        aluminumProductService.modifyProduct(aluminumProductDTO);
     }
 
     @Override

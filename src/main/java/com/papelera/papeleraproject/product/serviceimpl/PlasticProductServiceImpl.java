@@ -1,10 +1,8 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
-import com.papelera.papeleraproject.product.dto.CardboardProductDTO;
 import com.papelera.papeleraproject.product.dto.PlasticProductDTO;
 import com.papelera.papeleraproject.product.mapper.PlasticProductMapper;
-import com.papelera.papeleraproject.product.model.PlasticProductModel;
 import com.papelera.papeleraproject.product.service.PlasticProductService;
 import com.papelera.papeleraproject.product.service.model.PlasticProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +61,14 @@ public class PlasticProductServiceImpl implements PlasticProductService {
     }
 
     @Override
-    public PlasticProductModel modifyProduct(PlasticProductDTO plasticProductDTO) throws Exception {
+    public void modifyProduct(PlasticProductDTO plasticProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        return plasticProductModelService.modifyProduct(plasticProductMapper.toModel(plasticProductDTO));
+        if (plasticProductModelService.findByProductId(plasticProductDTO.getProductId()) == null) {
+            logger.log(Level.SEVERE, "There is not product with this id: " + plasticProductDTO.getProductId());
+        } else {
+            logger.log(Level.INFO, "modify product to: " + plasticProductDTO);
+            plasticProductModelService.modifyProduct(plasticProductMapper.toModel(plasticProductDTO));
+        }
     }
 
     @Override

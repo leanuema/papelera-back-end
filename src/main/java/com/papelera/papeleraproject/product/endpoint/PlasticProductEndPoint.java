@@ -17,7 +17,7 @@ public interface PlasticProductEndPoint {
     List<PlasticProductDTO> getAllPlasticProduct() throws Exception;
     PlasticProductDTO findByProductId(Long productId) throws Exception;
     List<PlasticProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
-    PlasticProductModel modifyProduct(PlasticProductDTO plasticProductDTO) throws Exception;
+    void modifyProduct(PlasticProductDTO plasticProductDTO) throws Exception;
     void createProduct(PlasticProductDTO plasticProductDTO) throws Exception;
     List<PlasticProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 }

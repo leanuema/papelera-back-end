@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class PaperProductDTO implements Serializable {
 
+    private static final long serialVersionUID = -1772546488944843175L;
+
     private Long productId;
     private String productName;
     private Double productQuantityPrice;
@@ -26,6 +28,18 @@ public class PaperProductDTO implements Serializable {
         this.productUnitPrice = productUnitPrice;
         this.productStatusId = productStatusId;
         this.featuredStatusId = featuredStatusId;
+    }
+
+    @Override
+    public String toString() {
+        return "PaperProductDTO{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productQuantityPrice=" + productQuantityPrice +
+                ", productUnitPrice=" + productUnitPrice +
+                ", productStatusId=" + productStatusId +
+                ", featuredStatusId=" + featuredStatusId +
+                '}';
     }
 
     /**

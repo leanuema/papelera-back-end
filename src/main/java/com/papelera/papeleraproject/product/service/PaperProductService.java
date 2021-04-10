@@ -13,7 +13,7 @@ public interface PaperProductService {
 
     List<PaperProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    PaperProductModel modifyProduct(PaperProductDTO paperProductDTO) throws Exception;
+    void modifyProduct(PaperProductDTO paperProductDTO) throws Exception;
 
     void createProduct(PaperProductDTO paperProductDTO) throws Exception;
 

@@ -14,7 +14,7 @@ public interface AluminumProductService {
 
     List<AluminumProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
 
-    AluminumProductModel modifyProduct(AluminumProductDTO aluminumProductDTO) throws Exception;
+    void modifyProduct(AluminumProductDTO aluminumProductDTO) throws Exception;
 
     void createProduct(AluminumProductDTO aluminumProductDTO) throws Exception;
 

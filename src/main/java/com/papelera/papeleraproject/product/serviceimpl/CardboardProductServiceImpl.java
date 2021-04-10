@@ -1,6 +1,5 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
-import com.papelera.papeleraproject.product.model.CardboardProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
@@ -65,16 +64,21 @@ public class CardboardProductServiceImpl implements CardboardProductService {
 
     @Transactional
     @Override
-    public CardboardProductModel modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
+    public void modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        return cardboardProductModelService.modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
+        if (cardboardProductModelService.findByProductId(cardboardProductDTO.getProductId()) == null) {
+            logger.log(Level.SEVERE, "There is not product with this id: " + cardboardProductDTO.getProductId());
+        } else {
+            logger.log(Level.INFO, "modify product to: " + cardboardProductDTO);
+             cardboardProductModelService.modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
+        }
     }
 
     @Transactional
     @Override
-    public void createProduct(CardboardProductDTO cardboardProductDTO) throws Exception {
+    public void createProduct(CardboardProductDTO cardboardProductDTO, Long productId) throws Exception {
         logger.log(Level.INFO, "begin of method to create product");
-        cardboardProductModelService.createProduct(cardboardProductMapper.toModel(cardboardProductDTO));
+        cardboardProductModelService.createProduct(cardboardProductMapper.toModel(cardboardProductDTO), productId);
     }
 
     @Override

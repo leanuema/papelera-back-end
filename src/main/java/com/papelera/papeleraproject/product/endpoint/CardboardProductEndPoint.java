@@ -17,8 +17,8 @@ public interface CardboardProductEndPoint {
 
     List<CardboardProductDTO> getAllCardboardProduct() throws Exception;
     List<CardboardProductDTO> getProductByStatusId(Integer statusId) throws Exception;
-    CardboardProductDTO modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception;
-    void createProduct(CardboardProductDTO cardboardProductDTO) throws Exception;
+    void modifyProduct(CardboardProductDTO cardboardProductDTO) throws Exception;
+    void createProduct(CardboardProductDTO cardboardProductDTO, Long productId) throws Exception;
     CardboardProductDTO findByProductId(Long productId) throws Exception;
     List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 }

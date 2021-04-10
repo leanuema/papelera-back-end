@@ -39,16 +39,16 @@ public class CardboardProductModelServiceImpl implements CardboardProductModelSe
 
     @Transactional
     @Override
-    public CardboardProductModel modifyProduct(CardboardProductModel cardboardProductModel) throws Exception {
+    public void modifyProduct(CardboardProductModel cardboardProductModel) throws Exception {
         logger.log(Level.INFO, "modifying data to data base.");
-        return cardboardProductRepository.save(cardboardProductModel);
+        cardboardProductRepository.save(cardboardProductModel);
     }
 
     @Transactional
     @Override
-    public void createProduct(CardboardProductModel cardboardProductModel) throws Exception {
+    public void createProduct(CardboardProductModel cardboardProductModel, Long productId) throws Exception {
         logger.log(Level.INFO, "creating product");
-        if (cardboardProductRepository.existsById(cardboardProductModel.getProductId())) {
+        if (cardboardProductRepository.existsById(productId)) {
             logger.log(Level.SEVERE, "cannot create product, there is a product with the same id: " +
                     cardboardProductModel.getProductId());
         } else {

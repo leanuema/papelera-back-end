@@ -2,7 +2,6 @@ package com.papelera.papeleraproject.product.resource;
 
 import com.papelera.papeleraproject.product.dto.PlasticProductDTO;
 import com.papelera.papeleraproject.product.endpoint.PlasticProductEndPoint;
-import com.papelera.papeleraproject.product.model.PlasticProductModel;
 import com.papelera.papeleraproject.product.service.PlasticProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -40,8 +39,8 @@ public class PlasticProductResource implements PlasticProductEndPoint {
     @Override
     @PutMapping(value = PlasticProductEndPoint.MODIFY_PRODUCT,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PlasticProductModel modifyProduct(@RequestBody PlasticProductDTO plasticProductDTO) throws Exception {
-        return null;
+    public void modifyProduct(@RequestBody PlasticProductDTO plasticProductDTO) throws Exception {
+        plasticProductService.modifyProduct(plasticProductDTO);
     }
 
     @Override

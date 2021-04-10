@@ -18,7 +18,7 @@ public interface OtherProductEndPoint {
     List<OtherProductDTO> getAllOtherProduct() throws Exception;
     OtherProductDTO findByProductId(Long productId) throws Exception;
     List<OtherProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
-    OtherProductDTO modifyProduct(OtherProductDTO otherProductDTO) throws Exception;
+    void modifyProduct(OtherProductDTO otherProductDTO) throws Exception;
     void createProduct(OtherProductDTO otherProductDTO) throws Exception;
     List<OtherProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
 }

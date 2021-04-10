@@ -64,9 +64,14 @@ public class PaperProductServiceImpl implements PaperProductService {
 
     @Transactional
     @Override
-    public PaperProductModel modifyProduct(PaperProductDTO paperProductDTO) throws Exception {
+    public void modifyProduct(PaperProductDTO paperProductDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to save product");
-        return paperProductModelService.modifyProduct(paperProductMapper.toModel(paperProductDTO));
+        if (paperProductModelService.findByProductId(paperProductDTO.getProductId()) == null) {
+            logger.log(Level.SEVERE, "There is not product with this id: " + paperProductDTO.getProductId());
+        } else {
+            logger.log(Level.INFO, "modify product to: " + paperProductDTO);
+            paperProductModelService.modifyProduct(paperProductMapper.toModel(paperProductDTO));
+        }
     }
 
     @Override
