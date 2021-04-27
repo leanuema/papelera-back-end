@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = AluminumProductEndPoint.BASE_URL)
-
 public class AluminumProductResource implements AluminumProductEndPoint {
 
     @Autowired

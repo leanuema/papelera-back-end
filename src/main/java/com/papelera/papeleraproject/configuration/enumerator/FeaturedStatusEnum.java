@@ -2,13 +2,13 @@ package com.papelera.papeleraproject.configuration.enumerator;
 
 public enum FeaturedStatusEnum {
 
-    FEATURED_ID(0, "FEATURED"),
-    FEATURED_DESCRIPTION(1, "NOT_FEATURED");
+    FEATURED(0L, "FEATURED"),
+    NOT_FEATURED(1L, "NOT_FEATURED");
 
-    private Integer id;
+    private Long id;
     private String description;
 
-    FeaturedStatusEnum(Integer id, String description) {
+    FeaturedStatusEnum(Long id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -17,11 +17,11 @@ public enum FeaturedStatusEnum {
     /**
      *Getter and Setter
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

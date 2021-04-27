@@ -4,9 +4,9 @@ import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
 
 import java.io.Serializable;
 
-public class CardboardProductDTO implements Serializable {
+public class ProductCore implements Serializable {
 
-    private static final long serialVersionUID = -6409186427663917035L;
+    private static final long serialVersionUID = 657233895050150283L;
 
     private Long productId;
     private String productName;
@@ -14,37 +14,14 @@ public class CardboardProductDTO implements Serializable {
     private Double productUnitPrice;
     private Integer productStatusId;
     private Long featuredStatusId;
-    private Integer cartStatus = CartStatusEnum.STATUS_OUT.getStatus();
+    private int cartStatus = CartStatusEnum.STATUS_OUT.getStatus();
 
-    public CardboardProductDTO() {
-    }
-
-    public CardboardProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Integer cartStatus) {
-        this.productId = productId;
-        this.productName = productName;
-        this.productQuantityPrice = productQuantityPrice;
-        this.productUnitPrice = productUnitPrice;
-        this.productStatusId = productStatusId;
-        this.featuredStatusId = featuredStatusId;
-        this.cartStatus = cartStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "CardboardProductDTO{" +
-                "productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", productQuantityPrice=" + productQuantityPrice +
-                ", productUnitPrice=" + productUnitPrice +
-                ", productStatusId=" + productStatusId +
-                ", featuredStatusId=" + featuredStatusId +
-                ", cartStatus=" + cartStatus +
-                '}';
+    public ProductCore() {
     }
 
     /**
      * Getter and Setter
-     **/
+     */
     public Long getProductId() {
         return productId;
     }
@@ -93,12 +70,11 @@ public class CardboardProductDTO implements Serializable {
         this.featuredStatusId = featuredStatusId;
     }
 
-    public Integer getCartStatus() {
+    public int getCartStatus() {
         return cartStatus;
     }
 
-    public void setCartStatus(Integer cartStatus) {
+    public void setCartStatus(int cartStatus) {
         this.cartStatus = cartStatus;
     }
 }
-

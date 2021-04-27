@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
+import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
@@ -51,7 +52,7 @@ public class CardboardProductServiceImpl implements CardboardProductService {
             for (CardboardProductDTO cardboardProductDTO : cardboardProductDTOList) {
                 if (cardboardProductDTO.getProductStatusId() != null
                         && !cardboardProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
-                && !cardboardProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+                        && !cardboardProductDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
                     cardboardProductDTOList = new ArrayList<>();
                     logger.log(Level.SEVERE, "There is not stock type available for the product");
                 }
@@ -70,7 +71,7 @@ public class CardboardProductServiceImpl implements CardboardProductService {
             logger.log(Level.SEVERE, "There is not product with this id: " + cardboardProductDTO.getProductId());
         } else {
             logger.log(Level.INFO, "modify product to: " + cardboardProductDTO);
-             cardboardProductModelService.modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
+            cardboardProductModelService.modifyProduct(cardboardProductMapper.toModel(cardboardProductDTO));
         }
     }
 
@@ -85,8 +86,19 @@ public class CardboardProductServiceImpl implements CardboardProductService {
     public List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "Searching products by featured status");
         return cardboardProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(cardboardProductModel ->
-               cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
+                cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
+    }
 
+    @Override
+    public List<CardboardProductDTO> findByIdAndName(Long id, String productName) throws Exception {
+        List<CardboardProductDTO> cardboardProductDTOList = cardboardProductModelService.findByIdAndName(id, productName)
+                .stream().map(cardboardProductModel -> cardboardProductMapper
+                        .toDTO(cardboardProductModel)).collect(Collectors.toList());
+        for (CardboardProductDTO productDTO : cardboardProductDTOList) {
+            productDTO.setCartStatus(CartStatusEnum.STATUS_IN.getStatus());
+            cardboardProductDTOList.add(productDTO);
+        }
+        return cardboardProductDTOList;
     }
 
 }

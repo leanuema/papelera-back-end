@@ -1,5 +1,7 @@
 package com.papelera.papeleraproject.product.dto;
 
+import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
+
 import java.io.Serializable;
 
 public class AluminumProductDTO implements Serializable {
@@ -12,6 +14,7 @@ public class AluminumProductDTO implements Serializable {
     private Double productUnitPrice;
     private Integer productStatusId;
     private Long featuredStatusId;
+    private Integer cartStatus = CartStatusEnum.STATUS_OUT.getStatus();
 
     public AluminumProductDTO() {
     }
@@ -87,5 +90,13 @@ public class AluminumProductDTO implements Serializable {
 
     public void setFeaturedStatusId(Long featuredStatusId) {
         this.featuredStatusId = featuredStatusId;
+    }
+
+    public Integer getCartStatus() {
+        return cartStatus;
+    }
+
+    public void setCartStatus(Integer cartStatus) {
+        this.cartStatus = cartStatus;
     }
 }

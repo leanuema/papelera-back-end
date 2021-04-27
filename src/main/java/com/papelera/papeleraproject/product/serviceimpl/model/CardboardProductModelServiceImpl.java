@@ -59,8 +59,14 @@ public class CardboardProductModelServiceImpl implements CardboardProductModelSe
 
     @Override
     public List<CardboardProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception {
-        logger.log(Level.INFO, "searching product from data base by id.");
+        logger.log(Level.INFO, "searching product from data base by feature id.");
         return cardboardProductRepository.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    public List<CardboardProductModel> findByIdAndName(Long id, String productName) throws Exception {
+        logger.log(Level.INFO, "searching product from data base by id and name.");
+        return cardboardProductRepository.findByIdAndName(id, productName);
     }
 
 }

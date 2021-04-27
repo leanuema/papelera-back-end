@@ -3,7 +3,6 @@ package com.papelera.papeleraproject.product.serviceimpl;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.AluminumProductDTO;
 import com.papelera.papeleraproject.product.mapper.AluminumProductMapper;
-import com.papelera.papeleraproject.product.model.AluminumProductModel;
 import com.papelera.papeleraproject.product.service.AluminumProductService;
 import com.papelera.papeleraproject.product.service.model.AluminumProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
