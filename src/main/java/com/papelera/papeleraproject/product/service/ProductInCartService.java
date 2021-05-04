@@ -1,12 +1,12 @@
 package com.papelera.papeleraproject.product.service;
 
-import com.papelera.papeleraproject.product.dto.ProductCart;
+import com.papelera.papeleraproject.product.dto.ProductInCartDTO;
 
 import java.util.List;
 
-public interface CartService {
+public interface ProductInCartService {
 
-    List<ProductCart> retrieveAllProductsInCart() throws Exception;
+    List<ProductInCartDTO> retrieveAllProductsInCart(Long userId) throws Exception;
     void deleteCart();
     void createCart();
     void addProductToCart(Long id, String productName) throws Exception;

@@ -18,7 +18,7 @@ public class CardboardProductResource implements CardboardProductEndPoint {
     private CardboardProductService cardboardProductService;
 
     @Override
-    @GetMapping(value = CardboardProductEndPoint.GET_ALL_CARDBOARD_BOX_PRODUCT,
+    @GetMapping(value = CardboardProductEndPoint.GET_ALL_CARDBOARD_PRODUCT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<CardboardProductDTO> getAllCardboardProduct() throws Exception {

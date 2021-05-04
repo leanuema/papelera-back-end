@@ -1,9 +1,9 @@
 package com.papelera.papeleraproject.product.service;
 
-import com.papelera.papeleraproject.product.dto.ProductCart;
+import com.papelera.papeleraproject.product.dto.ProductInCartDTO;
 
 public interface MessengerService {
 
-    void sendMsj(ProductCart productCart) throws Exception;
-    ProductCart getMsg() throws Exception;
+    void sendMsj(ProductInCartDTO productInCartDTO) throws Exception;
+    ProductInCartDTO getMsg() throws Exception;
 }
