@@ -1,6 +1,7 @@
 package com.papelera.papeleraproject.product.serviceimpl.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import com.papelera.papeleraproject.product.model.CardboardProductModel;
 import com.papelera.papeleraproject.product.repository.CardboardProductRepository;
@@ -67,6 +68,12 @@ public class CardboardProductModelServiceImpl implements CardboardProductModelSe
     public List<CardboardProductModel> findByIdAndName(Long id, String productName) throws Exception {
         logger.log(Level.INFO, "searching product from data base by id and name.");
         return cardboardProductRepository.findByIdAndName(id, productName);
+    }
+
+    @Override
+    public List<CardboardProductModel> searchProduct(Example<CardboardProductModel> example) throws Exception {
+        logger.log(Level.INFO, "Searching product: " + example);
+        return cardboardProductRepository.findAll(example);
     }
 
 }

@@ -5,6 +5,8 @@ import com.papelera.papeleraproject.product.endpoint.PaperProductEndPoint;
 import com.papelera.papeleraproject.product.model.PaperProductModel;
 import com.papelera.papeleraproject.product.service.PaperProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +59,16 @@ public class PaperProductResource implements PaperProductEndPoint {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PaperProductDTO> findProductByFeaturedStatusId(@RequestParam("featuredId") Long featuredId) throws Exception {
         return paperProductService.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    @GetMapping(value = PaperProductEndPoint.SEARCH_PRODUCT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<PaperProductDTO> searchProduct(@ModelAttribute("search") PaperProductDTO paperProductDTO,
+                                               ExampleMatcher exampleMatcher) throws Exception {
+        exampleMatcher = ExampleMatcher.matching().withMatcher("description",
+                ExampleMatcher.GenericPropertyMatchers.contains());
+        return paperProductService.searchProduct(paperProductDTO, exampleMatcher);
     }
 }

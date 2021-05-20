@@ -3,10 +3,13 @@ package com.papelera.papeleraproject.product.serviceimpl;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.OtherProductDTO;
 import com.papelera.papeleraproject.product.mapper.OtherProductMapper;
+import com.papelera.papeleraproject.product.model.AluminumProductModel;
 import com.papelera.papeleraproject.product.model.OtherProductModel;
 import com.papelera.papeleraproject.product.service.OtherProductService;
 import com.papelera.papeleraproject.product.service.model.OtherProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -84,5 +87,14 @@ public class OtherProductServiceImpl implements OtherProductService {
         logger.log(Level.INFO, "Searching products by status");
         return otherProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(otherProductModel ->
                 otherProductMapper.toDTO(otherProductModel)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OtherProductDTO> searchProduct(OtherProductDTO otherProductDTO, ExampleMatcher exampleMatcher) throws Exception {
+        logger.log(Level.INFO, "searching product: " + otherProductDTO);
+        Example<OtherProductModel> productModelExample = Example.of(otherProductMapper.toModel(otherProductDTO), exampleMatcher);
+        return otherProductModelService.searchProduct(productModelExample)
+                .stream().map(otherProductModel ->
+                        otherProductMapper.toDTO(otherProductModel)).collect(Collectors.toList());
     }
 }

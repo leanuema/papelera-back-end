@@ -1,6 +1,7 @@
 package com.papelera.papeleraproject.product.service.model;
 
 import com.papelera.papeleraproject.product.model.CardboardProductModel;
+import org.springframework.data.domain.Example;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,5 +15,6 @@ public interface CardboardProductModelService {
     void createProduct(CardboardProductModel cardboardProductModel, Long productId) throws Exception;
     List<CardboardProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception;
     List<CardboardProductModel> findByIdAndName(Long id, String productName) throws Exception;
+    List<CardboardProductModel> searchProduct(Example<CardboardProductModel> example) throws Exception;
 
 }

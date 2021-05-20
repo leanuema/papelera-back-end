@@ -3,9 +3,12 @@ package com.papelera.papeleraproject.product.serviceimpl;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.AluminumProductDTO;
 import com.papelera.papeleraproject.product.mapper.AluminumProductMapper;
+import com.papelera.papeleraproject.product.model.AluminumProductModel;
 import com.papelera.papeleraproject.product.service.AluminumProductService;
 import com.papelera.papeleraproject.product.service.model.AluminumProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,5 +83,14 @@ public class AluminumProductServiceImpl implements AluminumProductService {
         logger.log(Level.INFO, "Searching products by status");
         return aluminumProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(aluminumProductModel ->
                 aluminumProductMapper.toDTO(aluminumProductModel)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AluminumProductDTO> searchProduct(AluminumProductDTO aluminumProductDTO, ExampleMatcher exampleMatcher) throws Exception {
+        logger.log(Level.INFO, "searching product: " + aluminumProductDTO);
+        Example<AluminumProductModel> productModelExample = Example.of(aluminumProductMapper.toModel(aluminumProductDTO), exampleMatcher);
+        return aluminumProductModelService.searchProduct(productModelExample)
+                .stream().map(aluminumProductModel ->
+                        aluminumProductMapper.toDTO(aluminumProductModel)).collect(Collectors.toList());
     }
 }

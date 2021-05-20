@@ -1,7 +1,10 @@
 package com.papelera.papeleraproject.product.restservice;
 
 import com.papelera.papeleraproject.product.endpoint.CardboardProductEndPoint;
+import com.papelera.papeleraproject.product.model.CardboardProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import com.papelera.papeleraproject.product.dto.CardboardProductDTO;
@@ -43,6 +46,11 @@ public class CardboardProductRestService implements CardboardProductEndPoint {
 
     @Override
     public List<CardboardProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<CardboardProductDTO> searchProduct(CardboardProductDTO cardboardProductDTO, ExampleMatcher exampleMatcher) throws Exception {
         return null;
     }
 }

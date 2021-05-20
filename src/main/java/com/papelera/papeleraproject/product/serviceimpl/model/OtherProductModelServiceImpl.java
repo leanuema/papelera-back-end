@@ -4,6 +4,7 @@ import com.papelera.papeleraproject.product.model.OtherProductModel;
 import com.papelera.papeleraproject.product.repository.OtherProductRepository;
 import com.papelera.papeleraproject.product.service.model.OtherProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -61,5 +62,11 @@ public class OtherProductModelServiceImpl implements OtherProductModelService {
     public List<OtherProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "searching product from data base by id.");
         return otherProductRepository.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    public List<OtherProductModel> searchProduct(Example<OtherProductModel> example) throws Exception {
+        logger.log(Level.INFO, "searching product: " + example);
+        return otherProductRepository.findAll(example);
     }
 }

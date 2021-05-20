@@ -4,6 +4,7 @@ import com.papelera.papeleraproject.product.model.AluminumProductModel;
 import com.papelera.papeleraproject.product.repository.AluminumProductRepository;
 import com.papelera.papeleraproject.product.service.model.AluminumProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +59,11 @@ public class AluminumProductModelServiceImpl implements AluminumProductModelServ
     public List<AluminumProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception {
         logger.log(Level.INFO, "searching product from data base by id.");
         return aluminumProductRepository.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    public List<AluminumProductModel> searchProduct(Example<AluminumProductModel> example) throws Exception {
+        logger.log(Level.INFO, "searching product: " + example);
+        return aluminumProductRepository.findAll(example);
     }
 }

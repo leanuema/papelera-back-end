@@ -4,10 +4,13 @@ import com.papelera.papeleraproject.product.dto.PlasticProductDTO;
 import com.papelera.papeleraproject.product.endpoint.PlasticProductEndPoint;
 import com.papelera.papeleraproject.product.service.PlasticProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping(value = PlasticProductEndPoint.BASE_URL)
 public class PlasticProductResource implements PlasticProductEndPoint {
@@ -55,5 +58,16 @@ public class PlasticProductResource implements PlasticProductEndPoint {
     produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PlasticProductDTO> findProductByFeaturedStatusId(@RequestParam("featuredId") Long featuredId) throws Exception {
         return plasticProductService.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    @GetMapping(value = PlasticProductEndPoint.SEARCH_PRODUCT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<PlasticProductDTO> searchProduct(@ModelAttribute("search") PlasticProductDTO plasticProductDTO,
+                                                 ExampleMatcher exampleMatcher) throws Exception {
+        exampleMatcher = ExampleMatcher.matching().withMatcher("description",
+                ExampleMatcher.GenericPropertyMatchers.contains());
+        return plasticProductService.searchProduct(plasticProductDTO, exampleMatcher);
     }
 }

@@ -1,7 +1,10 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
 import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
+import com.papelera.papeleraproject.product.model.CardboardProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.CardboardProductDTO;
@@ -99,6 +102,15 @@ public class CardboardProductServiceImpl implements CardboardProductService {
             cardboardProductDTOList.add(productDTO);
         }
         return cardboardProductDTOList;
+    }
+
+    @Override
+    public List<CardboardProductDTO> searchProduct(CardboardProductDTO cardboardProductDTO, ExampleMatcher exampleMatcher) throws Exception {
+        logger.log(Level.INFO, "searching product: " + cardboardProductDTO);
+        Example<CardboardProductModel> cardboardProductModelExample = Example.of(cardboardProductMapper.toModel(cardboardProductDTO), exampleMatcher);
+        return cardboardProductModelService.searchProduct(cardboardProductModelExample)
+                .stream().map(cardboardProductModel ->
+                        cardboardProductMapper.toDTO(cardboardProductModel)).collect(Collectors.toList());
     }
 
 }

@@ -4,10 +4,13 @@ import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.CardboardProductDTO;
 import com.papelera.papeleraproject.product.dto.PaperProductDTO;
 import com.papelera.papeleraproject.product.mapper.PaperProductMapper;
+import com.papelera.papeleraproject.product.model.OtherProductModel;
 import com.papelera.papeleraproject.product.model.PaperProductModel;
 import com.papelera.papeleraproject.product.service.PaperProductService;
 import com.papelera.papeleraproject.product.service.model.PaperProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -86,5 +89,14 @@ public class PaperProductServiceImpl implements PaperProductService {
         logger.log(Level.INFO, "Searching products by featured status");
         return paperProductModelService.findProductByFeaturedStatusId(featuredId).stream().map(paperProductModel ->
                 paperProductMapper.toDTO(paperProductModel)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PaperProductDTO> searchProduct(PaperProductDTO paperProductDTO, ExampleMatcher exampleMatcher) throws Exception {
+        logger.log(Level.INFO, "searching product: " + paperProductDTO);
+        Example<PaperProductModel> productModelExample = Example.of(paperProductMapper.toModel(paperProductDTO), exampleMatcher);
+        return paperProductModelService.searchProduct(productModelExample)
+                .stream().map(paperProductModel ->
+                        paperProductMapper.toDTO(paperProductModel)).collect(Collectors.toList());
     }
 }

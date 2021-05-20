@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class ProductInCartResource implements CartEndPoint {
     @Override
     @GetMapping(value = CartEndPoint.RETRIEVE_ALL_PRODUCTS,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductInCartDTO> retrieveAllProducts(Long userId) throws Exception {
+    public List<ProductInCartDTO> retrieveAllProducts(@RequestParam Long userId) throws Exception {
         return productInCartService.retrieveAllProductsInCart(userId);
     }
 }

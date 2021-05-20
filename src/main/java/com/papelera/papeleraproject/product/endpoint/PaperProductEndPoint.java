@@ -2,6 +2,7 @@ package com.papelera.papeleraproject.product.endpoint;
 
 import com.papelera.papeleraproject.product.dto.PaperProductDTO;
 import com.papelera.papeleraproject.product.model.PaperProductModel;
+import org.springframework.data.domain.ExampleMatcher;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public interface PaperProductEndPoint {
     String MODIFY_PRODUCT = "/modify-product";
     String CREATING_PRODUCT = "/create-product";
     String GET_PAPER_PRODUCT_BY_FEATURED_STATUS = "/find_by_featured_status";
+    String SEARCH_PRODUCT = "/search-product";
 
     List<PaperProductDTO> getAllPaperProduct() throws Exception;
     PaperProductDTO findByProductId(Long productId) throws Exception;
@@ -21,4 +23,6 @@ public interface PaperProductEndPoint {
     void modifyProduct(PaperProductDTO paperProductDTO) throws Exception;
     void createProduct(PaperProductDTO paperProductDTO) throws Exception;
     List<PaperProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
+    List<PaperProductDTO> searchProduct(PaperProductDTO paperProductDTO, ExampleMatcher exampleMatcher) throws Exception;
+
 }

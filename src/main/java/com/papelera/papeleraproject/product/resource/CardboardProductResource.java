@@ -1,6 +1,7 @@
 package com.papelera.papeleraproject.product.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,6 @@ public class CardboardProductResource implements CardboardProductEndPoint {
     @Override
     @GetMapping(value = CardboardProductEndPoint.GET_CARDBOARD_PRODUCT_BY_ID,
             produces = MediaType.APPLICATION_JSON_VALUE)
-
     public CardboardProductDTO findByProductId(@RequestParam("productId") Long productId) throws Exception {
         return cardboardProductService.findByProductId(productId);
     }
@@ -63,6 +63,17 @@ public class CardboardProductResource implements CardboardProductEndPoint {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CardboardProductDTO> findProductByFeaturedStatusId(@RequestParam("featuredId") Long featuredId) throws Exception {
         return cardboardProductService.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    @GetMapping(value = CardboardProductEndPoint.SEARCH_PRODUCT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<CardboardProductDTO> searchProduct(@ModelAttribute("search") CardboardProductDTO cardboardProductDTO,
+                                                   ExampleMatcher exampleMatcher) throws Exception {
+        exampleMatcher = ExampleMatcher.matching().withMatcher("description",
+                ExampleMatcher.GenericPropertyMatchers.contains());
+        return cardboardProductService.searchProduct(cardboardProductDTO, exampleMatcher);
     }
 
 }

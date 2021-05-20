@@ -5,6 +5,7 @@ import com.papelera.papeleraproject.product.endpoint.AluminumProductEndPoint;
 import com.papelera.papeleraproject.product.model.AluminumProductModel;
 import com.papelera.papeleraproject.product.service.AluminumProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ public class AluminumProductResource implements AluminumProductEndPoint {
 
     @Autowired
     private AluminumProductService aluminumProductService;
-
 
     @Override
     @GetMapping(value = AluminumProductEndPoint.GET_ALL_ALUMINUM_PRODUCT
@@ -61,5 +61,15 @@ public class AluminumProductResource implements AluminumProductEndPoint {
     ,produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AluminumProductDTO> findProductByFeaturedStatusId(@RequestParam("featuredId") Long featuredId) throws Exception {
         return aluminumProductService.findProductByFeaturedStatusId(featuredId);
+    }
+
+    @Override
+    @GetMapping(value = AluminumProductEndPoint.SEARCH_PRODUCT,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<AluminumProductDTO> searchProduct(@ModelAttribute("search")AluminumProductDTO aluminumProductDTO,
+                                                  ExampleMatcher exampleMatcher) throws Exception {
+        exampleMatcher = ExampleMatcher.matching().withMatcher("description", ExampleMatcher.GenericPropertyMatchers.contains());
+        return aluminumProductService.searchProduct(aluminumProductDTO, exampleMatcher);
     }
 }
