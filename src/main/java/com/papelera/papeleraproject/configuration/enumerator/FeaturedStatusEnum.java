@@ -2,8 +2,8 @@ package com.papelera.papeleraproject.configuration.enumerator;
 
 public enum FeaturedStatusEnum {
 
-    FEATURED(0L, "FEATURED"),
-    NOT_FEATURED(1L, "NOT_FEATURED");
+    FEATURED(1L, "FEATURED"),
+    NOT_FEATURED(2L, "NOT_FEATURED");
 
     private Long id;
     private String description;

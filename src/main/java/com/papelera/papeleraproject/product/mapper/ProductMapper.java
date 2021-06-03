@@ -15,6 +15,7 @@ public class ProductMapper {
         productModel.setProductStatusId(productDTO.getProductStatusId());
         productModel.setProductQuantityPrice(productDTO.getProductQuantityPrice());
         productModel.setFeaturedStatusId(productDTO.getFeaturedStatusId());
+        productModel.setCategoryId(productDTO.getCategoryId());
         return productModel;
     }
 
@@ -26,6 +27,7 @@ public class ProductMapper {
         productDTO.setProductUnitPrice(productModel.getProductUnitPrice());
         productDTO.setProductQuantityPrice(productModel.getProductQuantityPrice());
         productDTO.setFeaturedStatusId(productModel.getFeaturedStatusId());
+        productDTO.setCategoryId(productModel.getCategoryId());
         return productDTO;
     }
 }

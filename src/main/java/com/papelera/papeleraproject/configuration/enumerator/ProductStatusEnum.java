@@ -2,8 +2,8 @@ package com.papelera.papeleraproject.configuration.enumerator;
 
 public enum ProductStatusEnum {
 
-    STOCK_UNAVAILABLE(0, "STOCK_UNAVAILABLE"),
-    STOCK_AVAILABLE(1, "STOCK_AVAILABLE");
+    STOCK_UNAVAILABLE(1, "STOCK_UNAVAILABLE"),
+    STOCK_AVAILABLE(2, "STOCK_AVAILABLE");
 
     private Integer id;
     private String description;
