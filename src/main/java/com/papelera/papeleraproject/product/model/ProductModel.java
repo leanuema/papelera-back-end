@@ -4,8 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "CARDBOARD_PRODUCT")
-public class CardboardProductModel implements Serializable {
+@Table(name = "PRODUCT")
+public class ProductModel implements Serializable {
+
+    private static final long serialVersionUID = -3825668381843408692L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +23,20 @@ public class CardboardProductModel implements Serializable {
     private Integer productStatusId;
     @Column(name = "FEATURED_ID")
     private Long featuredStatusId;
+    @Column(name = "CATEGORY_ID")
+    private Long categoryId;
 
-    public CardboardProductModel() {
+    public ProductModel() {
     }
 
-    public CardboardProductModel(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId) {
+    public ProductModel(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Long categoryId) {
         this.productId = productId;
         this.productName = productName;
         this.productQuantityPrice = productQuantityPrice;
         this.productUnitPrice = productUnitPrice;
         this.productStatusId = productStatusId;
         this.featuredStatusId = featuredStatusId;
+        this.categoryId = categoryId;
     }
 
     /**
@@ -83,5 +88,13 @@ public class CardboardProductModel implements Serializable {
 
     public void setFeaturedStatusId(Long featuredStatusId) {
         this.featuredStatusId = featuredStatusId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

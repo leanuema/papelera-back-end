@@ -4,9 +4,9 @@ import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
 
 import java.io.Serializable;
 
-public class CardboardProductDTO implements Serializable {
+public class ProductDTO implements Serializable {
 
-    private static final long serialVersionUID = -6409186427663917035L;
+    private static final long serialVersionUID = -7063196584296599430L;
 
     private Long productId;
     private String productName;
@@ -14,37 +14,40 @@ public class CardboardProductDTO implements Serializable {
     private Double productUnitPrice;
     private Integer productStatusId;
     private Long featuredStatusId;
+    private Long categoryId;
     private Integer cartStatus = CartStatusEnum.STATUS_OUT.getStatus();
 
-    public CardboardProductDTO() {
+    public ProductDTO() {
     }
 
-    public CardboardProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Integer cartStatus) {
+    public ProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Long categoryId, Integer cartStatus) {
         this.productId = productId;
         this.productName = productName;
         this.productQuantityPrice = productQuantityPrice;
         this.productUnitPrice = productUnitPrice;
         this.productStatusId = productStatusId;
         this.featuredStatusId = featuredStatusId;
+        this.categoryId = categoryId;
         this.cartStatus = cartStatus;
     }
 
     @Override
     public String toString() {
-        return "CardboardProductDTO{" +
+        return "ProductDTO{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", productQuantityPrice=" + productQuantityPrice +
                 ", productUnitPrice=" + productUnitPrice +
                 ", productStatusId=" + productStatusId +
                 ", featuredStatusId=" + featuredStatusId +
+                ", categoryId=" + categoryId +
                 ", cartStatus=" + cartStatus +
                 '}';
     }
 
     /**
      * Getter and Setter
-     **/
+     */
     public Long getProductId() {
         return productId;
     }
@@ -100,5 +103,12 @@ public class CardboardProductDTO implements Serializable {
     public void setCartStatus(Integer cartStatus) {
         this.cartStatus = cartStatus;
     }
-}
 
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+}
