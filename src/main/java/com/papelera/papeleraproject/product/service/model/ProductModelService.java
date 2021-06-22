@@ -19,5 +19,5 @@ public interface ProductModelService {
     List<ProductModel> getAllOtherProduct() throws Exception;
     List<ProductModel> getAllPaperProduct() throws Exception;
     List<ProductModel> getAllPlasticProduct() throws Exception;
-    void disableProduct(Long productId) throws Exception;
+    void changeStatusProduct(Long productId, Integer productStatusId) throws Exception;
 }

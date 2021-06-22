@@ -99,8 +99,8 @@ public class ProductModelServiceImpl implements ProductModelService {
     }
 
     @Override
-    public void disableProduct(Long productId) throws Exception {
+    public void changeStatusProduct(Long productId, Integer productStatusId) throws Exception {
         productRepository.findById(productId).ifPresent(productModel ->
-                        productModel.setProductStatusId(ProductStatusEnum.STOCK_UNAVAILABLE.getId()));
+                        productModel.setProductStatusId(productStatusId));
     }
 }

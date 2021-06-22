@@ -17,23 +17,23 @@ public interface ProductRepository extends JpaRepository<ProductModel, Long> {
             "FROM PRODUCT p WHERE p.FEATURED_ID = :featuredId", nativeQuery = true)
     List<ProductModel> findProductByFeaturedStatusId(@Param("featuredId") Long statusId);
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.CATEGORY_ID = 1", nativeQuery = true)
     List<ProductModel> findAllAluminumByCategoryId();
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.CATEGORY_ID = 2", nativeQuery = true)
     List<ProductModel> findAllCardboardByCategoryId();
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.CATEGORY_ID = 3", nativeQuery = true)
     List<ProductModel> findAllOtherByCategoryId();
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.CATEGORY_ID = 4", nativeQuery = true)
     List<ProductModel> findAllPaperByCategoryId();
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.CATEGORY_ID = 5", nativeQuery = true)
     List<ProductModel> findAllPlasticByCategoryId();
 }

@@ -121,10 +121,10 @@ public class ProductResource implements ProductEndPoint {
     }
 
     @Override
-    @PutMapping(value = ProductEndPoint.DISABLE_PRODUCT)
+    @PutMapping(value = ProductEndPoint.CHANGE_STATUS_PRODUCT)
     @ResponseStatus(HttpStatus.GONE)
-    public void disableProduct(Long productId) throws Exception {
+    public void changeStatusProduct(Long productId, Integer productStatusId) throws Exception {
         logger.log(Level.INFO, "Change status to disable product");
-        productService.disableProduct(productId);
+        productService.changeStatusProduct(productId, productStatusId);
     }
 }
