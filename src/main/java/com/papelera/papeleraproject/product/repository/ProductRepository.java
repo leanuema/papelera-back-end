@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductModel, Long> {
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.STATUS_ID = :statusId", nativeQuery = true)
     List<ProductModel> findProductByStatusId(@Param("statusId") Integer statusId);
 
-    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID " +
+    @Query(value = "SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.PRODUCT_QUANTITY_PRICE, p.PRODUCT_UNIT_PRICE, p.STATUS_ID, p.FEATURED_ID, p.CATEGORY_ID " +
             "FROM PRODUCT p WHERE p.FEATURED_ID = :featuredId", nativeQuery = true)
     List<ProductModel> findProductByFeaturedStatusId(@Param("featuredId") Long statusId);
 

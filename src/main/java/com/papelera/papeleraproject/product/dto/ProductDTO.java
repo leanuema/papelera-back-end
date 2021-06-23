@@ -15,12 +15,11 @@ public class ProductDTO implements Serializable {
     private Integer productStatusId;
     private Long featuredStatusId;
     private Long categoryId;
-    private Integer cartStatus = CartStatusEnum.STATUS_OUT.getStatus();
 
     public ProductDTO() {
     }
 
-    public ProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Long categoryId, Integer cartStatus) {
+    public ProductDTO(Long productId, String productName, Double productQuantityPrice, Double productUnitPrice, Integer productStatusId, Long featuredStatusId, Long categoryId) {
         this.productId = productId;
         this.productName = productName;
         this.productQuantityPrice = productQuantityPrice;
@@ -28,7 +27,6 @@ public class ProductDTO implements Serializable {
         this.productStatusId = productStatusId;
         this.featuredStatusId = featuredStatusId;
         this.categoryId = categoryId;
-        this.cartStatus = cartStatus;
     }
 
     @Override
@@ -41,7 +39,6 @@ public class ProductDTO implements Serializable {
                 ", productStatusId=" + productStatusId +
                 ", featuredStatusId=" + featuredStatusId +
                 ", categoryId=" + categoryId +
-                ", cartStatus=" + cartStatus +
                 '}';
     }
 
@@ -94,14 +91,6 @@ public class ProductDTO implements Serializable {
 
     public void setFeaturedStatusId(Long featuredStatusId) {
         this.featuredStatusId = featuredStatusId;
-    }
-
-    public Integer getCartStatus() {
-        return cartStatus;
-    }
-
-    public void setCartStatus(Integer cartStatus) {
-        this.cartStatus = cartStatus;
     }
 
     public Long getCategoryId() {
