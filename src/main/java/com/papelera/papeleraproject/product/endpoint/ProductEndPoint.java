@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductEndPoint {
 
-    String BASE_URL = "product";
+    String BASE_URL = "/product";
     String GET_ALL_PRODUCT = "/get-all-product";
     String GET_PRODUCT_BY_ID = "/get-product-by-id";
     String GET_PRODUCT_BY_STATUS = "/get-product-by-status";

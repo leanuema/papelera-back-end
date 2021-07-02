@@ -26,10 +26,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
-                antMatchers(HttpMethod.GET, "product/get-all-product",
-                        "product/get-product-by-id", "product/search-product", "product/get-all-aluminum-product",
-                        "product/get-all-cardboard-product", "product/get-all-other-product",
-                        "product/get-all-paper-product", "product/get-all-plastic-product").permitAll()
+                antMatchers(HttpMethod.GET, "/product/get-all-product",
+                        "/product/get-product-by-id", "/product/search-product", "/product/get-all-aluminum-product",
+                        "/product/get-all-cardboard-product", "/product/get-all-other-product",
+                        "/product/get-all-paper-product", "/product/get-all-plastic-product").permitAll()
                 /*.antMatchers(HttpMethod.GET, "/user/find-user-by-id").
                 hasAnyRole(UserRoleEnum.ADMIN.getDescription(), UserRoleEnum.USER.getDescription())
                 .antMatchers(HttpMethod.POST, "/user/create-user").
