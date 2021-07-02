@@ -1,17 +1,15 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
+import com.papelera.papeleraproject.configuration.enumerator.FeaturedStatusEnum;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
 import com.papelera.papeleraproject.product.mapper.ProductMapper;
-import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.service.ProductService;
 import com.papelera.papeleraproject.product.service.model.ProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,13 +48,11 @@ public class ProductServiceImpl implements ProductService {
                     .stream().map(productModel -> productMapper
                             .toDTO(productModel)).collect(Collectors.toList());
             for (ProductDTO productDTO : productDTOList) {
-                if (productDTO.getProductStatusId() != null
-                        && !productDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
-                        || !productDTO.getProductStatusId().equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+                if (validateIsStatusAvailable(productDTO.getProductStatusId().longValue()).equals(Boolean.FALSE)) {
                     productDTOList = new ArrayList<>();
-                    logger.log(Level.SEVERE, "There is not stock type available for the product");
                 }
             }
+            logger.log(Level.SEVERE, "There is not stock type available for the product");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not retrieve value from database ", e);
             productDTOList = new ArrayList<>();
@@ -64,12 +60,21 @@ public class ProductServiceImpl implements ProductService {
         return productDTOList;
     }
 
+    private Boolean validateIsStatusAvailable(Long productStatus) {
+        if (productStatus != null
+                && !productStatus.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
+                && !productStatus.equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
     @Override
     @Transactional
     public void modifyProduct(ProductDTO productDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to modify product");
         try {
-            if (productModelService.findByProductId(productDTO.getProductId()) != null) {
+            if (productDTO != null) {
                 logger.log(Level.INFO, "modify product: " + productDTO);
                 productModelService.modifyProduct(productMapper.toModel(productDTO));
             }
@@ -87,18 +92,38 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception {
-        logger.log(Level.INFO, "Searching products by status = " + featuredId);
-        return productModelService.findProductByFeaturedStatusId(featuredId).stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+        logger.log(Level.INFO, "Searching products by featured status = " + featuredId);
+        List<ProductDTO> productDTOList;
+        try {
+            productDTOList = productModelService.findProductByFeaturedStatusId(featuredId).stream().map(productModel ->
+                    productMapper.toDTO(productModel)).collect(Collectors.toList());
+            for (ProductDTO productDTO : productDTOList) {
+                if (validateIsFeaturedStatusAvailable(productDTO.getFeaturedStatusId()).equals(Boolean.FALSE)) {
+                    productDTOList = new ArrayList<>();
+                }
+            }
+            logger.log(Level.SEVERE, "There is not featured available for the product");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Could not retrieve value from database ", e);
+            productDTOList = new ArrayList<>();
+        }
+        return productDTOList;
+    }
+
+    private Boolean validateIsFeaturedStatusAvailable(Long productFeaturedStatus) {
+        if (productFeaturedStatus != null
+                && !productFeaturedStatus.equals(FeaturedStatusEnum.FEATURED.getId())
+                && !productFeaturedStatus.equals(FeaturedStatusEnum.NOT_FEATURED.getId())) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 
     @Override
-    public List<ProductDTO> searchProduct(ProductDTO productDTO, ExampleMatcher exampleMatcher) throws Exception {
-        logger.log(Level.INFO, "searching product: " + productDTO.toString());
-        Example<ProductModel> productModelExample = Example.of(productMapper.toModel(productDTO), exampleMatcher);
-        return productModelService.searchProduct(productModelExample)
-                .stream().map(productModel ->
-                        productMapper.toDTO(productModel)).collect(Collectors.toList());
+    public List<ProductDTO> searchProduct(String productName) throws Exception {
+        logger.log(Level.INFO, "searching product: " + productName);
+        return productModelService.searchProduct("%" + productName + "%").
+                stream().map(productModel -> productMapper.toDTO(productModel)).collect(Collectors.toList());
     }
 
     @Override
@@ -141,12 +166,17 @@ public class ProductServiceImpl implements ProductService {
     public void changeStatusProduct(Long productId, Integer productStatusId) {
         logger.log(Level.INFO, "change product with id = " + productId + "status to = " + productStatusId);
         try {
-            if (productId != null && productStatusId.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
-                    || productStatusId.equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
-                productModelService.changeStatusProduct(productId, productStatusId);
-            }
+            validateProductStatus(productId, productStatusId);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not change status from product with id: " + productId, e);
         }
     }
+
+    private void validateProductStatus(Long productId, Integer productStatusId) throws Exception {
+        if (productId != null && productStatusId.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
+                || productStatusId.equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+            productModelService.changeStatusProduct(productId, productStatusId);
+        }
+    }
+
 }

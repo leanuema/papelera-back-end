@@ -1,6 +1,6 @@
 package com.papelera.papeleraproject.configuration.enumerator;
 
-public enum ProductCategory {
+public enum ProductCategoryEnum {
 
     ALUMINUM_PRODUCT(1L, "aluminum-product"),
     CARDBOARD_PRODUCT(2L, "cardboard-product"),
@@ -11,7 +11,7 @@ public enum ProductCategory {
     private Long id;
     private String categoryName;
 
-    ProductCategory(Long id, String categoryName) {
+    ProductCategoryEnum(Long id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
     }

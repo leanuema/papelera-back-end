@@ -1,7 +1,5 @@
 package com.papelera.papeleraproject.product.dto;
 
-import com.papelera.papeleraproject.configuration.enumerator.CartStatusEnum;
-
 import java.io.Serializable;
 
 public class ProductDTO implements Serializable {

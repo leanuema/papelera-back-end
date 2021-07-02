@@ -7,6 +7,7 @@ import com.papelera.papeleraproject.product.service.model.ProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -63,9 +64,9 @@ public class ProductModelServiceImpl implements ProductModelService {
     }
 
     @Override
-    public List<ProductModel> searchProduct(Example<ProductModel> example) throws Exception {
-        logger.log(Level.INFO, "searching product: " + example);
-        return productRepository.findAll(example);
+    public List<ProductModel> searchProduct(String productName) throws Exception {
+        logger.log(Level.INFO, "searching product from data base: " + productName);
+        return productRepository.findProductByProductName(productName);
     }
 
     @Override

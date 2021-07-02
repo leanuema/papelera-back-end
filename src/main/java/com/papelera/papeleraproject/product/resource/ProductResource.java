@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@CrossOrigin(origins = {"http://localhost:8080", "https://papelera-project.herokuapp.com/"})
 @RestController
 @RequestMapping(value = ProductEndPoint.BASE_URL)
 public class ProductResource implements ProductEndPoint {
@@ -30,6 +32,7 @@ public class ProductResource implements ProductEndPoint {
         return productService.getAllProducts();
     }
 
+    @Secured(value = {"ROLE_ADMIN", "ROLE_USER"})
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_ID
             ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,6 +41,7 @@ public class ProductResource implements ProductEndPoint {
         return productService.findByProductId(productId);
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_STATUS
     ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,6 +50,7 @@ public class ProductResource implements ProductEndPoint {
         return productService.getStockAvailableProducts(statusId);
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping (value = ProductEndPoint.MODIFY_PRODUCT)
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -53,15 +58,16 @@ public class ProductResource implements ProductEndPoint {
         productService.modifyProduct(productDTO);
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @Override
     @PostMapping (value = ProductEndPoint.CREATING_PRODUCT
     ,consumes= MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody ProductDTO productDTO) throws Exception {
         productService.createProduct(productDTO);
-
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @Override
     @GetMapping(value = ProductEndPoint.FIND_BY_FEATURED_STATUS
     ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -74,10 +80,9 @@ public class ProductResource implements ProductEndPoint {
     @GetMapping(value = ProductEndPoint.SEARCH_PRODUCT,
     produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ProductDTO> searchProduct(@ModelAttribute("search") ProductDTO productDTO,
-                                                  ExampleMatcher exampleMatcher) throws Exception {
-        exampleMatcher = ExampleMatcher.matching().withMatcher("description", ExampleMatcher.GenericPropertyMatchers.contains());
-        return productService.searchProduct(productDTO, exampleMatcher);
+    public List<ProductDTO> searchProduct(@RequestParam("productName") String productName) throws Exception {
+        logger.log(Level.INFO, "Searching product with name: " + productName);
+        return productService.searchProduct(productName);
     }
 
     @Override
@@ -120,11 +125,14 @@ public class ProductResource implements ProductEndPoint {
         return productService.getAllPlasticProduct();
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping(value = ProductEndPoint.CHANGE_STATUS_PRODUCT)
     @ResponseStatus(HttpStatus.GONE)
-    public void changeStatusProduct(Long productId, Integer productStatusId) throws Exception {
+    public void changeStatusProduct(@RequestParam("productId") Long productId,
+                                    @RequestParam("productStatusId")Integer productStatusId) throws Exception {
         logger.log(Level.INFO, "Change status to disable product");
         productService.changeStatusProduct(productId, productStatusId);
     }
+
 }

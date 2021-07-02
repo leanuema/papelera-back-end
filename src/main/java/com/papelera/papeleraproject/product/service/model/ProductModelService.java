@@ -13,7 +13,7 @@ public interface ProductModelService {
     ProductModel modifyProduct(ProductModel productModel) throws Exception;
     void createProduct(ProductModel productModel) throws Exception;
     List<ProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception;
-    List<ProductModel> searchProduct(Example<ProductModel> example) throws Exception;
+    List<ProductModel> searchProduct(String productName) throws Exception;
     List<ProductModel> getAllAluminumProduct() throws Exception;
     List<ProductModel> getAllCardboardProduct() throws Exception;
     List<ProductModel> getAllOtherProduct() throws Exception;

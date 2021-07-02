@@ -13,7 +13,7 @@ public interface ProductService {
     void modifyProduct(ProductDTO productDTO) throws Exception;
     void createProduct(ProductDTO productDTO) throws Exception;
     List<ProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
-    List<ProductDTO> searchProduct(ProductDTO productDTO, ExampleMatcher exampleMatcher) throws Exception;
+    List<ProductDTO> searchProduct(String productName) throws Exception;
     List<ProductDTO> getAllAluminumProduct() throws Exception;
     List<ProductDTO> getAllCardboardProduct() throws Exception;
     List<ProductDTO> getAllOtherProduct() throws Exception;
