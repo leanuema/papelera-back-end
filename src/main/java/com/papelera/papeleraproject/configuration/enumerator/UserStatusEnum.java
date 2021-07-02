@@ -1,17 +1,18 @@
 package com.papelera.papeleraproject.configuration.enumerator;
 
-public enum ProductStatusEnum {
+public enum UserStatusEnum {
 
-    STOCK_UNAVAILABLE(1L, "STOCK_UNAVAILABLE"),
-    STOCK_AVAILABLE(2L, "STOCK_AVAILABLE");
+    USER_AVAILABLE(1L, "USER_AVAILABLE"),
+    USER_UNAVAILABLE(2L, "USER_UNAVAILABLE");
 
     private Long id;
     private String description;
 
-    ProductStatusEnum(Long id, String description) {
+    UserStatusEnum(Long id, String description) {
         this.id = id;
         this.description = description;
     }
+
 
     /**
      *Getter and Setter
