@@ -2,8 +2,8 @@ package com.papelera.papeleraproject.configuration.enumerator;
 
 public enum UserRoleEnum {
 
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER");
+    ADMIN("ADMIN"),
+    USER("USER");
 
     private String description;
 

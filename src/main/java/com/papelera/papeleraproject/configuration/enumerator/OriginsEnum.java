@@ -3,7 +3,7 @@ package com.papelera.papeleraproject.configuration.enumerator;
 public enum OriginsEnum {
 
     HEROKU_CLIENT("https://papelera-project.herokuapp.com/"),
-    LOCAL_HOST("http://localhost:8080/");
+    LOCAL_HOST("http://localhost:8080");
 
     private String client;
 
