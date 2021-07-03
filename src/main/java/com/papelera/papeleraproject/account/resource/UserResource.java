@@ -20,7 +20,6 @@ public class UserResource implements UserEndPoint {
     @Autowired
     protected UserService userService;
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @GetMapping(value = UserEndPoint.GET_ALL_USERS, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.FOUND)
@@ -28,7 +27,6 @@ public class UserResource implements UserEndPoint {
         return userService.getAllUsers();
     }
 
-    @Secured(value = {"ROLE_ADMIN", "ROLE_USER"})
     @Override
     @GetMapping(value = UserEndPoint.FIND_USER_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.FOUND)
@@ -36,7 +34,6 @@ public class UserResource implements UserEndPoint {
         return userService.findUserById(userId);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PostMapping(value = UserEndPoint.CREATE_USER, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +42,6 @@ public class UserResource implements UserEndPoint {
         return userService.createUser(user);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping(value = UserEndPoint.CHANGE_USER_STATUS, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -54,7 +50,6 @@ public class UserResource implements UserEndPoint {
         userService.changeStatusUser(userId, userStatusId);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping(value = UserEndPoint.MODIFY_USER, produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = {"http://localhost:8080", "https://papelera-project.herokuapp.com/"})
+@CrossOrigin(origins = {"http://localhost:8080/", "https://papelera-project.herokuapp.com/"})
 @RestController
 @RequestMapping(value = ProductEndPoint.BASE_URL)
 public class ProductResource implements ProductEndPoint {
@@ -32,7 +32,6 @@ public class ProductResource implements ProductEndPoint {
         return productService.getAllProducts();
     }
 
-    @Secured(value = {"ROLE_ADMIN", "ROLE_USER"})
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_ID
             ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +40,6 @@ public class ProductResource implements ProductEndPoint {
         return productService.findByProductId(productId);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_STATUS
     ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,7 +48,6 @@ public class ProductResource implements ProductEndPoint {
         return productService.getStockAvailableProducts(statusId);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping (value = ProductEndPoint.MODIFY_PRODUCT)
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -58,7 +55,6 @@ public class ProductResource implements ProductEndPoint {
         productService.modifyProduct(productDTO);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PostMapping (value = ProductEndPoint.CREATING_PRODUCT
     ,consumes= MediaType.APPLICATION_JSON_VALUE)
@@ -67,7 +63,6 @@ public class ProductResource implements ProductEndPoint {
         productService.createProduct(productDTO);
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @GetMapping(value = ProductEndPoint.FIND_BY_FEATURED_STATUS
     ,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -125,7 +120,6 @@ public class ProductResource implements ProductEndPoint {
         return productService.getAllPlasticProduct();
     }
 
-    @Secured(value = "ROLE_ADMIN")
     @Override
     @PutMapping(value = ProductEndPoint.CHANGE_STATUS_PRODUCT)
     @ResponseStatus(HttpStatus.GONE)

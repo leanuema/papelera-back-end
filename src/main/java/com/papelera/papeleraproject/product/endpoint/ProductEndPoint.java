@@ -8,12 +8,16 @@ import java.util.List;
 public interface ProductEndPoint {
 
     String BASE_URL = "/product";
+    String ALL_OTHER_END_POINT = "/product/**";
     String GET_ALL_PRODUCT = "/get-all-product";
     String GET_PRODUCT_BY_ID = "/get-product-by-id";
+    String GET_PRODUCT_BY_ID_PARAM = "?productId={productId}";
     String GET_PRODUCT_BY_STATUS = "/get-product-by-status";
+    String GET_PRODUCT_BY_STATUS_PARAM = "?statusId={statusId}";
     String MODIFY_PRODUCT = "/modify-product";
     String CREATING_PRODUCT = "/create-product";
     String FIND_BY_FEATURED_STATUS = "/find_by_featured_status";
+    String FIND_BY_FEATURED_STATUS_PARAM = "?featuredId={featuredId}";
     String SEARCH_PRODUCT = "/search-product";
     String GET_ALL_ALUMINUM_PRODUCT = "/get-all-aluminum-product";
     String GET_ALL_CARDBOARD_PRODUCT = "/get-all-cardboard-product";
@@ -21,6 +25,7 @@ public interface ProductEndPoint {
     String GET_ALL_PAPER_PRODUCT = "/get-all-paper-product";
     String GET_ALL_PLASTIC_PRODUCT = "/get-all-plastic-product";
     String CHANGE_STATUS_PRODUCT = "/change-status-product";
+    String CHANGE_STATUS_PRODUCT_PARAM = "?productId={productId}";
 
     List<ProductDTO> getAllProducts() throws Exception;
     ProductDTO findByProductId(Long productId) throws Exception;
