@@ -3,7 +3,6 @@ package com.papelera.papeleraproject.account.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -30,7 +29,7 @@ public class User implements Serializable {
     private Date userDateFrom;
     @Column(name = "USER_DATE_TO")
     private Date userDateTo;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "AUTHORIZATION",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ROLE_ID"),

@@ -1,6 +1,7 @@
 package com.papelera.papeleraproject.configuration;
 
 import com.papelera.papeleraproject.configuration.enumerator.AppClientEnum;
+import com.papelera.papeleraproject.configuration.enumerator.JWTConfigurationEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -59,8 +60,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey(JWTConfiguration.RSA_PRIVATE.getDescription());
-        jwtAccessTokenConverter.setVerifierKey(JWTConfiguration.RSA_PUBLIC.getDescription());
+        jwtAccessTokenConverter.setSigningKey(JWTConfigurationEnum.RSA_PRIVATE.getDescription());
+        jwtAccessTokenConverter.setVerifierKey(JWTConfigurationEnum.RSA_PUBLIC.getDescription());
         return jwtAccessTokenConverter;
     }
 }

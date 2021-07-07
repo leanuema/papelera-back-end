@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserRoleEndPoint {
 
-    String BASE = "user-role";
+    String BASE = "/user-role";
     String ALL_OTHER_END_POINT = "/user-role/**";
     String GET_ALL_USER_ROLE = "/get-all-user-role";
     String FIND_USER_ROLE_BY_ID = "/find-user-role-by-id";

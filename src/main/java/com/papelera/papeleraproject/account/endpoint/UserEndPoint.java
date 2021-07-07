@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface UserEndPoint {
 
-    String BASE = "user";
+    String BASE = "/user";
     String ALL_OTHER_END_POINT = "/user/**";
-    String GET_ALL_USERS = "/get-all";
+    String GET_ALL_USERS = "/get-all-users";
     String FIND_USER_BY_ID = "/find-user-by-id";
     String FIND_USER_BY_ID_PARAM = "?userId={userId}";
     String CREATE_USER = "/create-user";

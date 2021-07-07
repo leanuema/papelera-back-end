@@ -1,6 +1,6 @@
-package com.papelera.papeleraproject.configuration;
+package com.papelera.papeleraproject.configuration.enumerator;
 
-public enum JWTConfiguration {
+public enum JWTConfigurationEnum {
 
     RSA_PRIVATE("-----BEGIN RSA PRIVATE KEY-----\n" +
             "MIIEowIBAAKCAQEA2QvG+3VOohX7S2gf+IuUxzLfhv71I27icsMcd9vdkTdY5Nei\n" +
@@ -41,7 +41,7 @@ public enum JWTConfiguration {
 
     private String description;
 
-    JWTConfiguration(String description) {
+    JWTConfigurationEnum(String description) {
         this.description = description;
     }
 
