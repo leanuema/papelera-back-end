@@ -11,4 +11,6 @@ public interface UserService {
     UserDTO createUser(UserDTO user) throws Exception;
     void changeStatusUser(Long id, Long userStatusId) throws Exception;
     UserDTO modifyUser(UserDTO user) throws Exception;
+    void changeUserPassword(Long userId, String newPassword);
+
 }

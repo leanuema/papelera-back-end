@@ -1,8 +1,16 @@
 package com.papelera.papeleraproject.account.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRoleDTO implements Serializable {
 
     private static final long serialVersionUID = 3790349193018107484L;
@@ -10,15 +18,6 @@ public class UserRoleDTO implements Serializable {
     private Long userRoleId;
     private String roleName;
     private String roleDescription;
-
-    public UserRoleDTO() {
-    }
-
-    public UserRoleDTO(Long userRoleId, String roleName, String roleDescription) {
-        this.userRoleId = userRoleId;
-        this.roleName = roleName;
-        this.roleDescription = roleDescription;
-    }
 
     @Override
     public String toString() {
@@ -29,30 +28,4 @@ public class UserRoleDTO implements Serializable {
                 '}';
     }
 
-    /**
-     * Getter and Setter
-     */
-    public Long getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(Long userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getRoleDescription() {
-        return roleDescription;
-    }
-
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
-    }
 }

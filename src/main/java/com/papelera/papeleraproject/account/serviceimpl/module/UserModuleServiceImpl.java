@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,8 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> getAllUsers() throws Exception {
@@ -39,6 +42,7 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
 
     @Override
     public User createUser(User user) throws Exception {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -56,6 +60,11 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
     @Override
     public User findUserByUsername(String username) throws Exception {
         return userRepository.findUserByUserName(username);
+    }
+
+    @Override
+    public void changeUserPassword(Long userId, String newPassword) {
+        userRepository.findById(userId).ifPresent(user -> user.setPassword(bCryptPasswordEncoder.encode(newPassword)));
     }
 
     @Override

@@ -55,6 +55,17 @@ public class UserResource implements UserEndPoint {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public UserDTO modifyUser(@RequestBody UserDTO user) throws Exception {
-        return userService.modifyUser(user);
+        if (userService.findUserById(user.getUserId()) != null) {
+            return userService.modifyUser(user);
+        }
+        throw new Exception();
+    }
+
+    @Override
+    @PutMapping(value = UserEndPoint.CHANGE_USER_PASSWORD, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void changeUserPassword(@RequestParam("userId") Long userId,
+                                   @RequestBody String newPassword) {
+        userService.changeUserPassword(userId, newPassword);
     }
 }

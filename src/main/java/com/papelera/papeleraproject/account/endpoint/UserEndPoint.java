@@ -15,10 +15,14 @@ public interface UserEndPoint {
     String CHANGE_USER_STATUS = "/change-status-user";
     String CHANGE_USER_STATUS_PARAM = "?userId={userId}?userStatusId={userStatusId}";
     String MODIFY_USER = "/modify-user";
+    String CHANGE_USER_PASSWORD ="/change-user-password";
+    String CHANGE_USER_PASSWORD_PARAM ="?userId={userId}";
 
     List<UserDTO> getAllUsers() throws Exception;
     UserDTO findUserById(Long userId) throws Exception;
     UserDTO createUser(UserDTO user) throws Exception;
     void changeStatusUser(Long userId, Long userStatusId) throws Exception;
     UserDTO modifyUser(UserDTO user) throws Exception;
+    void changeUserPassword(Long userId, String newPassword);
+
 }

@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService {
         logger.log(Level.INFO, "modifying user: " + user.toString());
         return userMapper.toDTO(userModuleService.modifyUser(userMapper.ToModel(user)));
     }
+
+    @Override
+    public void changeUserPassword(Long userId, String newPassword) {
+        logger.log(Level.INFO, "change password from user");
+        userModuleService.changeUserPassword(userId, newPassword);
+    }
 }
