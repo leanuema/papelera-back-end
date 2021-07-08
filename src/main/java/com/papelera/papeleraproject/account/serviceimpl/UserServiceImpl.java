@@ -6,6 +6,7 @@ import com.papelera.papeleraproject.account.service.UserService;
 import com.papelera.papeleraproject.account.service.module.UserModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -36,24 +37,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDTO createUser(UserDTO user) throws Exception {
         logger.log(Level.INFO, "mapping to userDTO: " + user.toString());
         return userMapper.toDTO(userModuleService.createUser(userMapper.ToModel(user)));
     }
 
     @Override
+    @Transactional
     public void changeStatusUser(Long id, Long userStatusId) throws Exception {
         logger.log(Level.INFO, "changing user with id= " + id + "status from user to = " + userStatusId);
         userModuleService.changeStatusUser(id, userStatusId);
     }
 
     @Override
+    @Transactional
     public UserDTO modifyUser(UserDTO user) throws Exception {
         logger.log(Level.INFO, "modifying user: " + user.toString());
         return userMapper.toDTO(userModuleService.modifyUser(userMapper.ToModel(user)));
     }
 
     @Override
+    @Transactional
     public void changeUserPassword(Long userId, String newPassword) {
         logger.log(Level.INFO, "change password from user");
         userModuleService.changeUserPassword(userId, newPassword);

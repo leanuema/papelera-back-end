@@ -41,18 +41,21 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
     }
 
     @Override
+    @Transactional
     public User createUser(User user) throws Exception {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void changeStatusUser(Long id, Long userStatusId) throws Exception {
         userRepository.findById(id).ifPresent(userModel ->
                 userModel.setUserStatus(userStatusId));
     }
 
     @Override
+    @Transactional
     public User modifyUser(User user) throws Exception {
         return userRepository.save(user);
     }
