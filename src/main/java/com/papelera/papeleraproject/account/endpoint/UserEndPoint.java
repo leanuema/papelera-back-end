@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.endpoint;
 
+import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface UserEndPoint {
 
     List<UserDTO> getAllUsers() throws Exception;
     UserDTO findUserById(Long userId) throws Exception;
-    UserDTO createUser(UserDTO user) throws Exception;
+    UserDTO createUser(UserCreationDTO user) throws Exception;
     void changeStatusUser(Long userId, Long userStatusId) throws Exception;
     UserDTO modifyUser(UserDTO user) throws Exception;
     void changeUserPassword(Long userId, String newPassword);

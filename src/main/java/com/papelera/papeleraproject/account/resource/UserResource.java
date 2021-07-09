@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.resource;
 
+import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 import com.papelera.papeleraproject.account.endpoint.UserEndPoint;
 import com.papelera.papeleraproject.account.service.UserService;
@@ -38,7 +39,7 @@ public class UserResource implements UserEndPoint {
     @PostMapping(value = UserEndPoint.CREATE_USER, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO createUser(@RequestBody UserDTO user) throws Exception {
+    public UserDTO createUser(@RequestBody UserCreationDTO user) throws Exception {
         return userService.createUser(user);
     }
 

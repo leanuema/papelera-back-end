@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM USER u WHERE u.USER_NAME LIKE :userName", nativeQuery = true)
-    User findUserByUserName(@Param("userName") String userName) throws Exception;
+    User findUserByUserName(@Param("userName") String userName);
 }

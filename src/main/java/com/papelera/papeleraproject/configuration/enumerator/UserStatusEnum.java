@@ -13,7 +13,6 @@ public enum UserStatusEnum {
         this.description = description;
     }
 
-
     /**
      *Getter and Setter
      */
