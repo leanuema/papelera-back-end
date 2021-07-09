@@ -37,12 +37,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_CARDBOARD_PRODUCT,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_OTHER_PRODUCT,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PAPER_PRODUCT,
-                        ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PLASTIC_PRODUCT).permitAll()
+                        ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PLASTIC_PRODUCT,
+                        UserEndPoint.BASE + UserEndPoint.GET_ALL_USERS).permitAll()
                 .antMatchers(HttpMethod.GET,
-                        UserEndPoint.BASE + UserEndPoint.FIND_USER_BY_ID + UserEndPoint.FIND_USER_BY_ID_PARAM).
+                        UserEndPoint.BASE + UserEndPoint.FIND_USER_BY_ID + UserEndPoint.FIND_USER_BY_ID_PARAM,
+                        UserEndPoint.BASE + UserEndPoint.CHANGE_USER_PASSWORD + UserEndPoint.CHANGE_USER_PASSWORD_PARAM).
                 hasAnyRole(UserRoleEnum.ADMIN.getDescription(), UserRoleEnum.USER.getDescription())
-                .antMatchers(UserEndPoint.ALL_OTHER_END_POINT,
-                        ProductEndPoint.ALL_OTHER_END_POINT,
+                .antMatchers(UserEndPoint.ALL_OTHER_END_POINT, ProductEndPoint.ALL_OTHER_END_POINT,
                         UserRoleEndPoint.ALL_OTHER_END_POINT).hasRole(UserRoleEnum.ADMIN.getDescription())
                 /*Cuando este el servicio de compra y agregar al carrito se implementan estos endpoints
                 .antMatchers("/comprar", "/agregar-al-carrito").authenticated()*/

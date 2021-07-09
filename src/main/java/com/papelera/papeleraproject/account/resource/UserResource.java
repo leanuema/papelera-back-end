@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.resource;
 
+import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 import com.papelera.papeleraproject.account.endpoint.UserEndPoint;
 import com.papelera.papeleraproject.account.service.UserService;
@@ -38,7 +39,7 @@ public class UserResource implements UserEndPoint {
     @PostMapping(value = UserEndPoint.CREATE_USER, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO createUser(@RequestBody UserDTO user) throws Exception {
+    public UserDTO createUser(@RequestBody UserCreationDTO user) throws Exception {
         return userService.createUser(user);
     }
 
@@ -55,6 +56,17 @@ public class UserResource implements UserEndPoint {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public UserDTO modifyUser(@RequestBody UserDTO user) throws Exception {
-        return userService.modifyUser(user);
+        if (userService.findUserById(user.getUserId()) != null) {
+            return userService.modifyUser(user);
+        }
+        throw new Exception();
+    }
+
+    @Override
+    @PutMapping(value = UserEndPoint.CHANGE_USER_PASSWORD, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void changeUserPassword(@RequestParam("userId") Long userId,
+                                   @RequestBody String newPassword) {
+        userService.changeUserPassword(userId, newPassword);
     }
 }

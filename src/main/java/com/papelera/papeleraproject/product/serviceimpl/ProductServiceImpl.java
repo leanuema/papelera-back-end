@@ -3,9 +3,10 @@ package com.papelera.papeleraproject.product.serviceimpl;
 import com.papelera.papeleraproject.configuration.enumerator.FeaturedStatusEnum;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
-import com.papelera.papeleraproject.product.mapper.ProductMapper;
+import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.service.ProductService;
 import com.papelera.papeleraproject.product.service.model.ProductModelService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,22 +22,24 @@ public class ProductServiceImpl implements ProductService {
 
     private final Logger logger = Logger.getLogger(ProductServiceImpl.class.getName());
 
+    private final ProductModelService productModelService;
+
     @Autowired
-    private ProductModelService productModelService;
-    @Autowired
-    private ProductMapper productMapper;
+    public ProductServiceImpl(ProductModelService productModelService) {
+        this.productModelService = productModelService;
+    }
 
     @Override
     public List<ProductDTO> getAllProducts() throws Exception {
         logger.log(Level.INFO, "Find all product");
         return productModelService.getAllProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public ProductDTO findByProductId(Long productId) throws Exception {
         logger.log(Level.INFO, "searching product with id = " + productId);
-        return productMapper.toDTO(productModelService.findByProductId(productId));
+        return new ModelMapper().map(productModelService.findByProductId(productId), ProductDTO.class);
     }
 
     @Override
@@ -45,8 +48,8 @@ public class ProductServiceImpl implements ProductService {
         logger.log(Level.INFO, "Searching products by status");
         try {
             productDTOList = productModelService.getStockAvailableProducts(statusId)
-                    .stream().map(productModel -> productMapper
-                            .toDTO(productModel)).collect(Collectors.toList());
+                    .stream().map(productModel -> new ModelMapper().
+                            map(productModel, ProductDTO.class)).collect(Collectors.toList());
             for (ProductDTO productDTO : productDTOList) {
                 if (validateIsStatusAvailable(productDTO.getProductStatusId().longValue()).equals(Boolean.FALSE)) {
                     productDTOList = new ArrayList<>();
@@ -76,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             if (productDTO != null) {
                 logger.log(Level.INFO, "modify product: " + productDTO);
-                productModelService.modifyProduct(productMapper.toModel(productDTO));
+                productModelService.modifyProduct(new ModelMapper().map(productDTO, ProductModel.class));
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not modify product", e);
@@ -87,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void createProduct(ProductDTO productDTO) throws Exception {
         logger.log(Level.INFO, "begin of method to create product" + productDTO.toString());
-        productModelService.createProduct(productMapper.toModel(productDTO));
+        productModelService.createProduct(new ModelMapper().map(productDTO, ProductModel.class));
     }
 
     @Override
@@ -96,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDTO> productDTOList;
         try {
             productDTOList = productModelService.findProductByFeaturedStatusId(featuredId).stream().map(productModel ->
-                    productMapper.toDTO(productModel)).collect(Collectors.toList());
+                    new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
             for (ProductDTO productDTO : productDTOList) {
                 if (validateIsFeaturedStatusAvailable(productDTO.getFeaturedStatusId()).equals(Boolean.FALSE)) {
                     productDTOList = new ArrayList<>();
@@ -123,42 +126,42 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> searchProduct(String productName) throws Exception {
         logger.log(Level.INFO, "searching product: " + productName);
         return productModelService.searchProduct("%" + productName + "%").
-                stream().map(productModel -> productMapper.toDTO(productModel)).collect(Collectors.toList());
+                stream().map(productModel -> new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> getAllAluminumProduct() throws Exception {
         logger.log(Level.INFO, "Searching aluminum products");
         return productModelService.getAllAluminumProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> getAllCardboardProduct() throws Exception {
         logger.log(Level.INFO, "Searching cardboard products");
         return productModelService.getAllCardboardProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> getAllOtherProduct() throws Exception {
         logger.log(Level.INFO, "Searching others products");
         return productModelService.getAllOtherProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> getAllPaperProduct() throws Exception {
         logger.log(Level.INFO, "Searching paper products");
         return productModelService.getAllPaperProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> getAllPlasticProduct() throws Exception {
         logger.log(Level.INFO, "Searching plastic products");
         return productModelService.getAllPlasticProduct().stream().map(productModel ->
-                productMapper.toDTO(productModel)).collect(Collectors.toList());
+                new ModelMapper().map(productModel, ProductDTO.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -173,8 +176,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void validateProductStatus(Long productId, Integer productStatusId) throws Exception {
-        if (productId != null && productStatusId.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId())
-                || productStatusId.equals(ProductStatusEnum.STOCK_AVAILABLE.getId())) {
+        if (productId != null && productStatusId.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId().intValue())
+                || productStatusId.equals(ProductStatusEnum.STOCK_AVAILABLE.getId().intValue())) {
             productModelService.changeStatusProduct(productId, productStatusId);
         }
     }

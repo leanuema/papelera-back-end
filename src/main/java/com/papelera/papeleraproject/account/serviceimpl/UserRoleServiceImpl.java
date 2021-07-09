@@ -13,10 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
 
-    @Autowired
     protected UserRoleModuleService userRoleModuleService;
-    @Autowired
     protected UserRoleMapper userRoleMapper;
+
+    @Autowired
+    public UserRoleServiceImpl(UserRoleModuleService userRoleModuleService, UserRoleMapper userRoleMapper) {
+        this.userRoleModuleService = userRoleModuleService;
+        this.userRoleMapper = userRoleMapper;
+    }
 
     @Override
     public List<UserRoleDTO> getAllUserRole() throws Exception {

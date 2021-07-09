@@ -1,8 +1,13 @@
 package com.papelera.papeleraproject.account.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "USER_ROLE")
 public class UserRole implements Serializable {
@@ -18,39 +23,4 @@ public class UserRole implements Serializable {
     @Column(name = "ROLE_DESCRIPTION")
     private String roleDescription;
 
-    public UserRole() {
-    }
-
-    public UserRole(Long userRoleId, String roleName, String roleDescription) {
-        this.userRoleId = userRoleId;
-        this.roleName = roleName;
-        this.roleDescription = roleDescription;
-    }
-
-    /**
-     * Getter and Setter
-     */
-    public Long getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(Long userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getRoleDescription() {
-        return roleDescription;
-    }
-
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
-    }
 }

@@ -27,11 +27,14 @@ dependencies {
     implementation group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
     implementation group: 'javax.xml.bind', name: 'jaxb-api'
     implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
 test {

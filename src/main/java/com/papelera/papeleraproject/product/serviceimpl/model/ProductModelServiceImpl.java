@@ -1,13 +1,10 @@
 package com.papelera.papeleraproject.product.serviceimpl.model;
 
-import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
 import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.repository.ProductRepository;
 import com.papelera.papeleraproject.product.service.model.ProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -18,8 +15,12 @@ public class ProductModelServiceImpl implements ProductModelService {
 
     private final Logger logger = Logger.getLogger(ProductModelServiceImpl.class.getName());
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductModelServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public List<ProductModel> getAllProduct() throws Exception {

@@ -12,4 +12,5 @@ public interface UserModuleService {
     void changeStatusUser(Long id, Long userStatusId) throws Exception;
     User modifyUser(User user) throws Exception;
     User findUserByUsername(String username) throws Exception;
+    void changeUserPassword(Long userId, String newPassword);
 }
