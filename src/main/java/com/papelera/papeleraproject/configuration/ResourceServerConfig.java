@@ -54,7 +54,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(OriginsEnum.LOCAL_HOST.getClient(),
-                OriginsEnum.HEROKU_CLIENT.getClient()));
+                OriginsEnum.HEROKU_CLIENT.getClient(), OriginsEnum.FRONT_HOST.getClient()));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS"));
         configuration.setAllowCredentials(Boolean.TRUE);
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
