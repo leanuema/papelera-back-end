@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +65,8 @@ public class UserServiceImpl implements UserService {
         userRoleDTOList.add(userRoleDTO);
 
         userDTO.setUserRoleList(userRoleDTOList);
+        userDTO.setUserStatus(UserStatusEnum.USER_AVAILABLE.getId());
+        userDTO.setUserDateFrom(new Date());
         return new ModelMapper().map(userModuleService.
                 createUser(new ModelMapper().map(userDTO, User.class)), UserDTO.class);
     }
