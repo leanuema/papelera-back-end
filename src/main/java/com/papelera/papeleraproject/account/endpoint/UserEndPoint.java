@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.endpoint;
 
+import com.papelera.papeleraproject.account.dto.ChangePasswordDTO;
 import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 
@@ -19,11 +20,11 @@ public interface UserEndPoint {
     String CHANGE_USER_PASSWORD ="/change-user-password";
     String CHANGE_USER_PASSWORD_PARAM ="?userId={userId}";
 
-    List<UserDTO> getAllUsers() throws Exception;
-    UserDTO findUserById(Long userId) throws Exception;
-    UserDTO createUser(UserCreationDTO user) throws Exception;
-    void changeStatusUser(Long userId, Long userStatusId) throws Exception;
-    UserDTO modifyUser(UserDTO user) throws Exception;
-    void changeUserPassword(Long userId, String newPassword);
+    List<UserDTO> getAllUsers();
+    UserDTO findUserById(Long userId);
+    UserDTO createUser(UserCreationDTO user);
+    void changeStatusUser(Long userId, Long userStatusId);
+    UserDTO modifyUser(UserDTO user);
+    void changeUserPassword(String email, ChangePasswordDTO changePasswordDTO);
 
 }

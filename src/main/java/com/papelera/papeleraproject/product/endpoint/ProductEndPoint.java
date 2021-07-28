@@ -27,18 +27,18 @@ public interface ProductEndPoint {
     String CHANGE_STATUS_PRODUCT = "/change-status-product";
     String CHANGE_STATUS_PRODUCT_PARAM = "?productId={productId}";
 
-    List<ProductDTO> getAllProducts() throws Exception;
-    ProductDTO findByProductId(Long productId) throws Exception;
-    List<ProductDTO> getStockAvailableProducts(Integer statusId) throws Exception;
-    void modifyProduct(ProductDTO productDTO) throws Exception;
-    void createProduct(ProductDTO productDTO) throws Exception;
-    List<ProductDTO> findProductByFeaturedStatusId(Long featuredId) throws Exception;
-    List<ProductDTO> searchProduct(String productName) throws Exception;
-    List<ProductDTO> getAllAluminumProduct() throws Exception;
-    List<ProductDTO> getAllCardboardProduct() throws Exception;
-    List<ProductDTO> getAllOtherProduct() throws Exception;
-    List<ProductDTO> getAllPaperProduct() throws Exception;
-    List<ProductDTO> getAllPlasticProduct() throws Exception;
-    void changeStatusProduct(Long productId, Integer productStatusId) throws Exception;
+    List<ProductDTO> getAllProducts();
+    ProductDTO findByProductId(Long productId);
+    List<ProductDTO> getStockAvailableProducts(Integer statusId);
+    void modifyProduct(ProductDTO productDTO);
+    void createProduct(ProductDTO productDTO);
+    List<ProductDTO> findProductByFeaturedStatusId(Long featuredId);
+    List<ProductDTO> searchProduct(String productName);
+    List<ProductDTO> getAllAluminumProduct();
+    List<ProductDTO> getAllCardboardProduct();
+    List<ProductDTO> getAllOtherProduct();
+    List<ProductDTO> getAllPaperProduct();
+    List<ProductDTO> getAllPlasticProduct();
+    void changeStatusProduct(Long productId, Integer productStatusId);
 
 }

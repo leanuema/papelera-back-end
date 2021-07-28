@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.service;
 
+import com.papelera.papeleraproject.account.dto.ChangePasswordDTO;
 import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 
@@ -12,6 +13,6 @@ public interface UserService {
     UserDTO createUser(UserCreationDTO user) throws Exception;
     void changeStatusUser(Long id, Long userStatusId) throws Exception;
     UserDTO modifyUser(UserDTO user) throws Exception;
-    void changeUserPassword(Long userId, String newPassword);
+    void changeUserPassword(String email, ChangePasswordDTO changePasswordDTO) throws Exception;
 
 }

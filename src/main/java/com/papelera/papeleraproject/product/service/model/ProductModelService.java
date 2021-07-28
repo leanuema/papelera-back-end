@@ -1,7 +1,6 @@
 package com.papelera.papeleraproject.product.service.model;
 
 import com.papelera.papeleraproject.product.model.ProductModel;
-import org.springframework.data.domain.Example;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface ProductModelService {
     List<ProductModel> getAllProduct() throws Exception;
     ProductModel findByProductId(Long productId) throws Exception;
     List<ProductModel> getStockAvailableProducts(Integer statusId) throws Exception;
-    ProductModel modifyProduct(ProductModel productModel) throws Exception;
+    void modifyProduct(ProductModel productModel) throws Exception;
     void createProduct(ProductModel productModel) throws Exception;
     List<ProductModel> findProductByFeaturedStatusId(Long featuredId) throws Exception;
     List<ProductModel> searchProduct(String productName) throws Exception;

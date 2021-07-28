@@ -4,6 +4,8 @@ import com.papelera.papeleraproject.product.dto.ProductDTO;
 import org.springframework.data.domain.ExampleMatcher;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
 
 public interface ProductService {
 

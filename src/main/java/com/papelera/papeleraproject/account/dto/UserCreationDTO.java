@@ -16,14 +16,4 @@ public class UserCreationDTO implements Serializable {
     private String password;
     private String email;
 
-    @Override
-    public String toString() {
-        return "UserCreationDTO{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
 }

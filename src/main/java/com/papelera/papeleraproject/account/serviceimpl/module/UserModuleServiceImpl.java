@@ -24,39 +24,41 @@ import java.util.stream.Collectors;
 public class UserModuleServiceImpl implements UserModuleService, UserDetailsService {
 
     private final Logger logger = Logger.getLogger(UserModuleServiceImpl.class.getName());
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserModuleServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
-    public List<User> getAllUsers() throws Exception {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User findUserById(Long id) throws Exception {
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
-    public User createUser(User user) throws Exception {
+    public User createUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
     @Transactional
-    public void changeStatusUser(Long id, Long userStatusId) throws Exception {
-        userRepository.findById(id).ifPresent(userModel ->
-                userModel.setUserStatus(userStatusId));
+    public void changeStatusUser(Long id, Long userStatusId) {
+        userRepository.findById(id).ifPresent(userModel -> userModel.setUserStatus(userStatusId));
     }
 
     @Override
     @Transactional
-    public User modifyUser(User user) throws Exception {
+    public User modifyUser(User user) {
         return userRepository.save(user);
     }
 
@@ -66,8 +68,16 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
     }
 
     @Override
-    public void changeUserPassword(Long userId, String newPassword) {
-        userRepository.findById(userId).ifPresent(user -> user.setPassword(bCryptPasswordEncoder.encode(newPassword)));
+    public void changeUserPassword(String email, String newPassword, String newPasswordConfirmation) throws Exception {
+        User user = findUserByEmail(email);
+        if (user != null && newPassword.equals(newPasswordConfirmation)) {
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        }
+    }
+
+    @Override
+    public User findUserByEmail(String email) throws Exception {
+        return userRepository.findUserByEmail(email);
     }
 
     @Override
