@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -86,7 +87,7 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
         logger.log(Level.INFO, "begin on method to search user by username: " + username);
         User user = new User();
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (username != null) {
+        if (Optional.ofNullable(username).isPresent()) {
             try {
                 user = userRepository.findUserByUserName(username);
                 logger.log(Level.INFO, "searching user");

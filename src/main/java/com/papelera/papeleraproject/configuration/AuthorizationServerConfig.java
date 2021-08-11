@@ -22,13 +22,17 @@ import java.util.Arrays;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Qualifier(value = "authenticationManager")
-    private AuthenticationManager authenticationManager;
     @Autowired
-    private AdditionalInfoToken additionalInfoToken;
+    private AuthenticationManager authenticationManager;
+    private final AdditionalInfoToken additionalInfoToken;
+
+    public AuthorizationServerConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
+                                     AdditionalInfoToken additionalInfoToken) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.additionalInfoToken = additionalInfoToken;
+    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
