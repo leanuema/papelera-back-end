@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@CrossOrigin(origins = {"http://localhost:8080", "https://papelera-project.herokuapp.com/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://papelera-project.herokuapp.com/"})
 @RestController
 @RequestMapping(value = UserEndPoint.BASE)
 public class UserResource implements UserEndPoint {

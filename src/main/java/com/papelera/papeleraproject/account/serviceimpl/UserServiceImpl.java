@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setUserRoleList(userRoleDTOList);
         userDTO.setUserStatus(UserStatusEnum.USER_AVAILABLE.getId());
+        userDTO.setUserId(userModuleService.findLastUserId());
         userDTO.setUserDateFrom(new Date());
         logger.log(Level.INFO, "mapping to user: " + user);
         return new ModelMapper().map(userModuleService.

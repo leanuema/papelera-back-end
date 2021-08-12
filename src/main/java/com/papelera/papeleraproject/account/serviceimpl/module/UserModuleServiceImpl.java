@@ -69,6 +69,7 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
     }
 
     @Override
+
     public void changeUserPassword(String email, String newPassword, String newPasswordConfirmation) throws Exception {
         User user = findUserByEmail(email);
         if (user != null && newPassword.equals(newPasswordConfirmation)) {
@@ -80,6 +81,12 @@ public class UserModuleServiceImpl implements UserModuleService, UserDetailsServ
     public User findUserByEmail(String email) throws Exception {
         return userRepository.findUserByEmail(email);
     }
+
+    @Override
+    public Long findLastUserId() throws Exception {
+        return userRepository.findLastUserId() + 1;
+    }
+
 
     @Override
     @Transactional(readOnly = true)

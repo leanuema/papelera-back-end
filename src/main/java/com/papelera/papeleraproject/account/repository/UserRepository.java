@@ -12,4 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM USER u WHERE u.USER_EMAIL LIKE :email", nativeQuery = true)
     User findUserByEmail(@Param("email") String email) throws Exception;
+
+    @Query (value = "SELECT MAX(USER_ID) FROM USER ", nativeQuery = true)
+    Long findLastUserId();
+
 }

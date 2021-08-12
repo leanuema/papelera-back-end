@@ -2,25 +2,19 @@ package com.papelera.papeleraproject.product.resource;
 
 import com.papelera.papeleraproject.product.dto.ProductDTO;
 import com.papelera.papeleraproject.product.endpoint.ProductEndPoint;
-import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.service.ProductService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:8080/", "https://papelera-project.herokuapp.com/"})
+
+@CrossOrigin(origins = {"http://localhost:4200", "https://papelera-project.herokuapp.com/"})
 @RestController
 @RequestMapping(value = ProductEndPoint.BASE_URL)
 public class ProductResource implements ProductEndPoint {
@@ -138,7 +132,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_ALUMINUM_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllAluminumProduct() {
         logger.log(Level.INFO, "Searching aluminum products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -152,7 +146,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_CARDBOARD_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllCardboardProduct() {
         logger.log(Level.INFO, "Searching aluminum products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -166,7 +160,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_OTHER_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllOtherProduct() {
         logger.log(Level.INFO, "Searching cardboard products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -180,7 +174,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_PAPER_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllPaperProduct() {
         logger.log(Level.INFO, "Searching others products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -194,7 +188,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_PLASTIC_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllPlasticProduct() {
         logger.log(Level.INFO, "Searching plastic products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -208,7 +202,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @PutMapping(value = ProductEndPoint.CHANGE_STATUS_PRODUCT)
-    @ResponseStatus(HttpStatus.GONE)
+    @ResponseStatus(HttpStatus.OK)
     public void changeStatusProduct(@RequestParam("productId") Long productId,
                                     @RequestParam("productStatusId") Integer productStatusId) {
         logger.log(Level.INFO, "change product with id = " + productId + "status to = " + productStatusId);
@@ -218,5 +212,6 @@ public class ProductResource implements ProductEndPoint {
             logger.log(Level.SEVERE, "Could not change status from product with id: " + productId, e);
         }
     }
+
 
 }
