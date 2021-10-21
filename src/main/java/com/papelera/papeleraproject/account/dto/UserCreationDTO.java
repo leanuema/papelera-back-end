@@ -15,15 +15,19 @@ public class UserCreationDTO implements Serializable {
     private String userName;
     private String password;
     private String email;
+    private String name;
+
 
     @Override
     public String toString() {
         return "UserCreationDTO{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
+
 
 }

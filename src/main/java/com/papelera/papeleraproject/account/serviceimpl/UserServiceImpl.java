@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.serviceimpl;
 
+import com.papelera.papeleraproject.account.dto.ChangePasswordDTO;
 import com.papelera.papeleraproject.account.dto.UserCreationDTO;
 import com.papelera.papeleraproject.account.dto.UserDTO;
 import com.papelera.papeleraproject.account.dto.UserRoleDTO;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -23,7 +26,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
-
     private final UserModuleService userModuleService;
     private final UserMapper userMapper;
 
@@ -31,10 +33,6 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserModuleService userModuleService, UserMapper userMapper) {
         this.userModuleService = userModuleService;
         this.userMapper = userMapper;
-    }
-
-    public String returnStatus(UserStatusEnum productStatusEnum) {
-        return productStatusEnum.getDescription();
     }
 
     @Override
@@ -53,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDTO createUser(UserCreationDTO user) throws Exception {
-        logger.log(Level.INFO, "mapping to userDTO: " + user.toString());
+        logger.log(Level.INFO, "creating user");
         UserDTO userDTO = userMapper.userCreationToUserDTO(user);
 
         UserRoleDTO userRoleDTO = new UserRoleDTO();
@@ -64,6 +62,10 @@ public class UserServiceImpl implements UserService {
         userRoleDTOList.add(userRoleDTO);
 
         userDTO.setUserRoleList(userRoleDTOList);
+        userDTO.setUserStatus(UserStatusEnum.USER_AVAILABLE.getId());
+        userDTO.setUserId(userModuleService.findLastUserId());
+        userDTO.setUserDateFrom(new Date());
+        logger.log(Level.INFO, "mapping to user: " + user);
         return new ModelMapper().map(userModuleService.
                 createUser(new ModelMapper().map(userDTO, User.class)), UserDTO.class);
     }
@@ -72,7 +74,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void changeStatusUser(Long id, Long userStatusId) throws Exception {
         logger.log(Level.INFO, "changing user with id= " + id + "status from user to = " + userStatusId);
-        userModuleService.changeStatusUser(id, userStatusId);
+        if (Optional.ofNullable(id).isPresent()) {
+            userModuleService.changeStatusUser(id, userStatusId);
+        }
     }
 
     @Override
@@ -85,8 +89,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void changeUserPassword(Long userId, String newPassword) {
+    public void changeUserPassword(String email, ChangePasswordDTO changePasswordDTO) throws Exception {
         logger.log(Level.INFO, "change password from user");
-        userModuleService.changeUserPassword(userId, newPassword);
+        userModuleService.changeUserPassword(email, changePasswordDTO.getNewPassword(),
+                changePasswordDTO.getNewPasswordConfirmation());
     }
 }
