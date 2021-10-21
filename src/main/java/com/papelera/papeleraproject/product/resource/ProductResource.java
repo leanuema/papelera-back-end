@@ -1,7 +1,10 @@
 package com.papelera.papeleraproject.product.resource;
 
+import com.papelera.papeleraproject.account.model.User;
+import com.papelera.papeleraproject.product.dto.CartDTO;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
 import com.papelera.papeleraproject.product.endpoint.ProductEndPoint;
+import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +48,7 @@ public class ProductResource implements ProductEndPoint {
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_ID
             , produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public ProductDTO findByProductId(@RequestParam("productId") Long productId) {
         logger.log(Level.INFO, "searching product with id = " + productId);
         ProductDTO productDTO = new ProductDTO();
@@ -118,7 +121,7 @@ public class ProductResource implements ProductEndPoint {
     @Override
     @GetMapping(value = ProductEndPoint.SEARCH_PRODUCT,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> searchProduct(@RequestParam("productName") String productName) {
         logger.log(Level.INFO, "Searching product with name: " + productName);
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -211,6 +214,39 @@ public class ProductResource implements ProductEndPoint {
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not change status from product with id: " + productId, e);
         }
+    }
+
+    @Override
+    @PostMapping(value = ProductEndPoint.ADD_TO_CART
+            , produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addToCart(@RequestParam("productId") ProductModel productId,
+                          @RequestParam("userId") User userId) {
+        logger.log(Level.INFO, "adding product");
+        try {
+            productService.addToCart(productId,userId);
+            logger.log(Level.INFO, "Successfully added" );
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error adding product", e);
+        }
+    }
+
+    @GetMapping(value = ProductEndPoint.LIST_CART_ITEMS, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @Override
+    public CartDTO listCartItems(@RequestParam("userId") Long userId) {
+        logger.log(Level.INFO, "Listing Cart of user:" + userId );
+
+        return productService.listCartItems(userId);
+    }
+
+    @DeleteMapping(value = ProductEndPoint.DELETE_CART_BY_ID)
+    @ResponseStatus(HttpStatus.OK)
+    @Override
+    public void deleteCartItem(Long cartId) {
+        productService.deleteCartItem(cartId);
+        logger.log(Level.INFO, "DELETING CART:" + cartId );
+
     }
 
 

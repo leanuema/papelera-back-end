@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.account.model;
 
+import com.papelera.papeleraproject.product.model.CartModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,5 +42,6 @@ public class User implements Serializable {
     uniqueConstraints = {@UniqueConstraint(columnNames = {"USER_ID", "USER_ROLE_ID"})
     })
     private List<UserRole> userRoleList;
+
 
 }

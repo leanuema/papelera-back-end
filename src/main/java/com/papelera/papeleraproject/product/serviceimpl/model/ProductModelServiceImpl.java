@@ -1,6 +1,11 @@
 package com.papelera.papeleraproject.product.serviceimpl.model;
 
+import com.papelera.papeleraproject.account.model.User;
+import com.papelera.papeleraproject.product.dto.CartDTO;
+import com.papelera.papeleraproject.product.dto.CartItemDTO;
+import com.papelera.papeleraproject.product.model.CartModel;
 import com.papelera.papeleraproject.product.model.ProductModel;
+import com.papelera.papeleraproject.product.repository.CartRepository;
 import com.papelera.papeleraproject.product.repository.ProductRepository;
 import com.papelera.papeleraproject.product.service.model.ProductModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,11 +21,14 @@ public class ProductModelServiceImpl implements ProductModelService {
 
     private final Logger logger = Logger.getLogger(ProductModelServiceImpl.class.getName());
     private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
 
     @Autowired
-    public ProductModelServiceImpl(ProductRepository productRepository) {
+    public ProductModelServiceImpl(ProductRepository productRepository, CartRepository cartRepository) {
         this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
     }
+
 
     @Override
     public List<ProductModel> getAllProduct() {
@@ -107,5 +114,57 @@ public class ProductModelServiceImpl implements ProductModelService {
         productRepository.findById(productId).ifPresent(productModel ->
                 productModel.setProductStatusId(productStatusId));
 
+    }
+
+    @Override
+    public void addToCart(ProductModel productId, User userId) throws Exception {
+        logger.log(Level.INFO, "adding product " + productId);
+        CartModel cart = new CartModel();
+        cart.setCartId(findLastCartId());
+        cart.setProductId(productId);
+        cart.setUserId(userId);
+        cart.setCartPrice(productId.getProductUnitPrice());
+        cartRepository.save(cart);
+
+    }
+
+    @Override
+    public Long findLastCartId() throws Exception {
+        return cartRepository.findLastCartId() + 1;
+    }
+
+    @Override
+    public CartItemDTO getDtoFromCart(CartModel cart){
+        CartItemDTO cartItemDTO = new CartItemDTO(cart);
+        return cartItemDTO;
+    }
+
+    @Override
+    public CartDTO listCartItems(Long userId)  {
+        List<CartModel> cartList = cartRepository.findCartProductByUserId(userId);
+        List<CartItemDTO> cartItems = new ArrayList<>();
+        for(CartModel cart:cartList){
+          CartItemDTO cartItemDTO = getDtoFromCart(cart);
+          cartItems.add(cartItemDTO);
+        }
+        double totalCost = 0;
+
+        for(CartItemDTO cartItemDTO:cartItems){
+          totalCost += cartItemDTO.getCartPrice();
+        }
+        CartDTO cartDTO = new CartDTO(cartItems,totalCost);
+
+
+        logger.log(Level.INFO, "Cart List " + cartDTO);
+        //CONTINUAR CODIGO ACA Y RESOURCE
+        return cartDTO;
+    }
+
+    @Override
+    public void deleteCartItem(Long cartId)  {
+        if(!cartRepository.existsById(cartId)){
+            logger.log(Level.INFO, "No Cart whit this Id.");
+        }
+        cartRepository.deleteById(cartId);
     }
 }

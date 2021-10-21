@@ -1,5 +1,9 @@
 package com.papelera.papeleraproject.product.service.model;
 
+import com.papelera.papeleraproject.account.model.User;
+import com.papelera.papeleraproject.product.dto.CartDTO;
+import com.papelera.papeleraproject.product.dto.CartItemDTO;
+import com.papelera.papeleraproject.product.model.CartModel;
 import com.papelera.papeleraproject.product.model.ProductModel;
 
 import java.util.List;
@@ -19,4 +23,10 @@ public interface ProductModelService {
     List<ProductModel> getAllPaperProduct() throws Exception;
     List<ProductModel> getAllPlasticProduct() throws Exception;
     void changeStatusProduct(Long productId, Integer productStatusId) throws Exception;
+    void addToCart(ProductModel productId,User userId) throws Exception;
+    Long findLastCartId() throws Exception;
+    CartItemDTO getDtoFromCart(CartModel cart);
+    CartDTO listCartItems(Long userId);
+    void deleteCartItem(Long cartId);
+
 }
