@@ -28,8 +28,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().
-                antMatchers(HttpMethod.GET,
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.DELETE,ProductEndPoint.BASE_URL + ProductEndPoint.DELETE_CART_BY_ID).permitAll()
+                .antMatchers(HttpMethod.GET,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PRODUCT,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_PRODUCT_BY_ID + ProductEndPoint.GET_PRODUCT_BY_ID_PARAM,
                         ProductEndPoint.BASE_URL + ProductEndPoint.SEARCH_PRODUCT,
@@ -38,7 +39,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_OTHER_PRODUCT,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PAPER_PRODUCT,
                         ProductEndPoint.BASE_URL + ProductEndPoint.GET_ALL_PLASTIC_PRODUCT,
+                        ProductEndPoint.BASE_URL + ProductEndPoint.LIST_CART_ITEMS,//PRUEBA
                         UserEndPoint.BASE + UserEndPoint.GET_ALL_USERS).permitAll()
+                .antMatchers(HttpMethod.POST, UserEndPoint.BASE + UserEndPoint.CREATE_USER).permitAll()
+                .antMatchers(HttpMethod.PUT, ProductEndPoint.ALL_OTHER_END_POINT).hasRole(UserRoleEnum.ADMIN.getDescription())
+                .antMatchers(HttpMethod.POST,ProductEndPoint.BASE_URL + ProductEndPoint.ADD_TO_CART).permitAll()
                 .antMatchers(HttpMethod.GET,
                         UserEndPoint.BASE + UserEndPoint.FIND_USER_BY_ID + UserEndPoint.FIND_USER_BY_ID_PARAM,
                         UserEndPoint.BASE + UserEndPoint.CHANGE_USER_PASSWORD + UserEndPoint.CHANGE_USER_PASSWORD_PARAM).
@@ -55,6 +60,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(OriginsEnum.LOCAL_HOST.getClient(),
                 OriginsEnum.HEROKU_CLIENT.getClient(), OriginsEnum.FRONT_HOST.getClient()));
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS"));
         configuration.setAllowCredentials(Boolean.TRUE);
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

@@ -1,26 +1,23 @@
 package com.papelera.papeleraproject.product.resource;
 
+import com.papelera.papeleraproject.account.model.User;
+import com.papelera.papeleraproject.product.dto.CartDTO;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
 import com.papelera.papeleraproject.product.endpoint.ProductEndPoint;
 import com.papelera.papeleraproject.product.model.ProductModel;
 import com.papelera.papeleraproject.product.service.ProductService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:8080/", "https://papelera-project.herokuapp.com/"})
+
+@CrossOrigin(origins = {"http://localhost:4200", "https://papelera-project.herokuapp.com/"})
 @RestController
 @RequestMapping(value = ProductEndPoint.BASE_URL)
 public class ProductResource implements ProductEndPoint {
@@ -51,7 +48,7 @@ public class ProductResource implements ProductEndPoint {
     @Override
     @GetMapping(value = ProductEndPoint.GET_PRODUCT_BY_ID
             , produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public ProductDTO findByProductId(@RequestParam("productId") Long productId) {
         logger.log(Level.INFO, "searching product with id = " + productId);
         ProductDTO productDTO = new ProductDTO();
@@ -124,7 +121,7 @@ public class ProductResource implements ProductEndPoint {
     @Override
     @GetMapping(value = ProductEndPoint.SEARCH_PRODUCT,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> searchProduct(@RequestParam("productName") String productName) {
         logger.log(Level.INFO, "Searching product with name: " + productName);
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -138,7 +135,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_ALUMINUM_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllAluminumProduct() {
         logger.log(Level.INFO, "Searching aluminum products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -152,7 +149,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_CARDBOARD_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllCardboardProduct() {
         logger.log(Level.INFO, "Searching aluminum products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -166,7 +163,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_OTHER_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllOtherProduct() {
         logger.log(Level.INFO, "Searching cardboard products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -180,7 +177,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_PAPER_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllPaperProduct() {
         logger.log(Level.INFO, "Searching others products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -194,7 +191,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @GetMapping(value = ProductEndPoint.GET_ALL_PLASTIC_PRODUCT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public List<ProductDTO> getAllPlasticProduct() {
         logger.log(Level.INFO, "Searching plastic products");
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -208,7 +205,7 @@ public class ProductResource implements ProductEndPoint {
 
     @Override
     @PutMapping(value = ProductEndPoint.CHANGE_STATUS_PRODUCT)
-    @ResponseStatus(HttpStatus.GONE)
+    @ResponseStatus(HttpStatus.OK)
     public void changeStatusProduct(@RequestParam("productId") Long productId,
                                     @RequestParam("productStatusId") Integer productStatusId) {
         logger.log(Level.INFO, "change product with id = " + productId + "status to = " + productStatusId);
@@ -218,5 +215,39 @@ public class ProductResource implements ProductEndPoint {
             logger.log(Level.SEVERE, "Could not change status from product with id: " + productId, e);
         }
     }
+
+    @Override
+    @PostMapping(value = ProductEndPoint.ADD_TO_CART
+            , produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addToCart(@RequestParam("productId") ProductModel productId,
+                          @RequestParam("userId") User userId) {
+        logger.log(Level.INFO, "adding product");
+        try {
+            productService.addToCart(productId,userId);
+            logger.log(Level.INFO, "Successfully added" );
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error adding product", e);
+        }
+    }
+
+    @GetMapping(value = ProductEndPoint.LIST_CART_ITEMS, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @Override
+    public CartDTO listCartItems(@RequestParam("userId") Long userId) {
+        logger.log(Level.INFO, "Listing Cart of user:" + userId );
+
+        return productService.listCartItems(userId);
+    }
+
+    @DeleteMapping(value = ProductEndPoint.DELETE_CART_BY_ID)
+    @ResponseStatus(HttpStatus.OK)
+    @Override
+    public void deleteCartItem(Long cartId) {
+        productService.deleteCartItem(cartId);
+        logger.log(Level.INFO, "DELETING CART:" + cartId );
+
+    }
+
 
 }

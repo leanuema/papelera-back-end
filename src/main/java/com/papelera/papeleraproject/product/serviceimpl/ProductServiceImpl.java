@@ -1,9 +1,14 @@
 package com.papelera.papeleraproject.product.serviceimpl;
 
+import com.papelera.papeleraproject.account.model.User;
 import com.papelera.papeleraproject.configuration.enumerator.FeaturedStatusEnum;
 import com.papelera.papeleraproject.configuration.enumerator.ProductStatusEnum;
+import com.papelera.papeleraproject.product.dto.CartDTO;
+import com.papelera.papeleraproject.product.dto.CartItemDTO;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
+import com.papelera.papeleraproject.product.model.CartModel;
 import com.papelera.papeleraproject.product.model.ProductModel;
+import com.papelera.papeleraproject.product.repository.CartRepository;
 import com.papelera.papeleraproject.product.service.ProductService;
 import com.papelera.papeleraproject.product.service.model.ProductModelService;
 import org.modelmapper.ModelMapper;
@@ -15,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -25,10 +29,12 @@ public class ProductServiceImpl implements ProductService {
 
     private final Logger logger = Logger.getLogger(ProductServiceImpl.class.getName());
     private final ProductModelService productModelService;
+    private final CartRepository cartRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductModelService productModelService) {
+    public ProductServiceImpl(ProductModelService productModelService, CartRepository cartRepository) {
         this.productModelService = productModelService;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -157,11 +163,33 @@ public class ProductServiceImpl implements ProductService {
         validateProductStatus(productId, productStatusId);
     }
 
+
     private void validateProductStatus(Long productId, Integer productStatusId) throws Exception {
         if (Optional.ofNullable(productId).isPresent() && productStatusId.equals(ProductStatusEnum.STOCK_UNAVAILABLE.getId().intValue())
                 || productStatusId.equals(ProductStatusEnum.STOCK_AVAILABLE.getId().intValue())) {
             productModelService.changeStatusProduct(productId, productStatusId);
         }
+    }
+
+    @Override
+    public void addToCart(ProductModel productId, User userId) throws Exception {
+        productModelService.addToCart(productId,userId);
+
+    }
+
+    @Override
+    public CartItemDTO getDtoFromCart(CartModel cart){
+        return productModelService.getDtoFromCart(cart);
+    }
+
+    @Override
+    public CartDTO listCartItems(Long userId) {
+        return productModelService.listCartItems(userId);
+    }
+
+    @Override
+    public void deleteCartItem(Long cartId) {
+        productModelService.deleteCartItem(cartId);
     }
 
 }

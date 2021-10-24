@@ -1,7 +1,9 @@
 package com.papelera.papeleraproject.product.endpoint;
 
+import com.papelera.papeleraproject.account.model.User;
+import com.papelera.papeleraproject.product.dto.CartDTO;
 import com.papelera.papeleraproject.product.dto.ProductDTO;
-import org.springframework.data.domain.ExampleMatcher;
+import com.papelera.papeleraproject.product.model.ProductModel;
 
 import java.util.List;
 
@@ -26,6 +28,9 @@ public interface ProductEndPoint {
     String GET_ALL_PLASTIC_PRODUCT = "/get-all-plastic-product";
     String CHANGE_STATUS_PRODUCT = "/change-status-product";
     String CHANGE_STATUS_PRODUCT_PARAM = "?productId={productId}";
+    String ADD_TO_CART = "/add-to-cart";
+    String LIST_CART_ITEMS = "/list-cart-items";
+    String DELETE_CART_BY_ID = "/delete-cart-by-id";
 
     List<ProductDTO> getAllProducts();
     ProductDTO findByProductId(Long productId);
@@ -40,5 +45,8 @@ public interface ProductEndPoint {
     List<ProductDTO> getAllPaperProduct();
     List<ProductDTO> getAllPlasticProduct();
     void changeStatusProduct(Long productId, Integer productStatusId);
+    void addToCart(ProductModel productId, User userId);
+    CartDTO listCartItems(Long userId);
+    void deleteCartItem(Long cartId);
 
 }

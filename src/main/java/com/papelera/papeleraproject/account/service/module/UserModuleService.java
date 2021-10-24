@@ -14,4 +14,6 @@ public interface UserModuleService {
     User findUserByUsername(String username) throws Exception;
     void changeUserPassword(String email, String newPassword, String newPasswordConfirmation) throws Exception;
     User findUserByEmail(String email) throws Exception;
+    Long findLastUserId() throws Exception;
+
 }
