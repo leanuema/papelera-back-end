@@ -14,11 +14,15 @@ public class CartItemDTO {
     private Long productId;
     private Long userId;
     private Double cartPrice;
+    private String cartProductName;
+    private Integer cartProductQuantity;
 
     public CartItemDTO(CartModel cart) {
         this.setCartId(cart.getCartId());
         this.setUserId(cart.getUserId().getUserId());
         this.setProductId(cart.getProductId().getProductId());
         this.setCartPrice(cart.getCartPrice());
+        this.setCartProductName(cart.getProductId().getProductName());
+        this.setCartProductQuantity(cart.getCartProductQuantity());
     }
 }

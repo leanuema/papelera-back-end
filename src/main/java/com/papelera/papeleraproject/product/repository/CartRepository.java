@@ -1,5 +1,6 @@
 package com.papelera.papeleraproject.product.repository;
 
+import com.papelera.papeleraproject.account.model.User;
 import com.papelera.papeleraproject.product.model.CartModel;
 import com.papelera.papeleraproject.product.model.ProductModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,7 @@ public interface CartRepository extends JpaRepository<CartModel,Long> {
             "FROM CART p WHERE p.CART_USER_ID = :userId", nativeQuery = true)
     List<CartModel> findCartProductByUserId(@Param("userId") Long productId);
 
+    @Query(value = "SELECT * " +
+            "FROM CART p WHERE p.CART_PRODUCT_ID = :productId AND p.CART_USER_ID = :userId", nativeQuery = true)
+    CartModel findCartUserAndProductId(@Param("productId") ProductModel productId,@Param("userId") User userId);
 }
