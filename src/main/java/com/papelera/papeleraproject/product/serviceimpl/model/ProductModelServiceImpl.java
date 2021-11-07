@@ -119,12 +119,22 @@ public class ProductModelServiceImpl implements ProductModelService {
     @Override
     public void addToCart(ProductModel productId, User userId) throws Exception {
         logger.log(Level.INFO, "adding product " + productId);
-        CartModel cart = new CartModel();
-        cart.setCartId(findLastCartId());
-        cart.setProductId(productId);
-        cart.setUserId(userId);
-        cart.setCartPrice(productId.getProductUnitPrice());
-        cartRepository.save(cart);
+        //busca si existe el producto añadido anteriormente por el usuario y le suma +1 a la cantidad
+        CartModel existingCart = cartRepository.findCartUserAndProductId(productId,userId);
+        if(existingCart != null){
+            logger.log(Level.INFO, "CART " + existingCart);
+            existingCart.setCartProductQuantity(existingCart.getCartProductQuantity()+1);
+            cartRepository.save(existingCart);
+        }else {
+            CartModel cart = new CartModel();
+            cart.setCartId(findLastCartId());
+            cart.setProductId(productId);
+            cart.setUserId(userId);
+            cart.setCartPrice(productId.getProductUnitPrice());
+            cart.setCartProductName(productId.getProductName());
+            cart.setCartProductQuantity(1);
+            cartRepository.save(cart);
+        }
 
     }
 
@@ -150,13 +160,13 @@ public class ProductModelServiceImpl implements ProductModelService {
         double totalCost = 0;
 
         for(CartItemDTO cartItemDTO:cartItems){
-          totalCost += cartItemDTO.getCartPrice();
+          totalCost += (cartItemDTO.getCartPrice() * cartItemDTO.getCartProductQuantity());
         }
         CartDTO cartDTO = new CartDTO(cartItems,totalCost);
 
 
         logger.log(Level.INFO, "Cart List " + cartDTO);
-        //CONTINUAR CODIGO ACA Y RESOURCE
+
         return cartDTO;
     }
 

@@ -61,7 +61,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         configuration.setAllowedOrigins(Arrays.asList(OriginsEnum.LOCAL_HOST.getClient(),
                 OriginsEnum.HEROKU_CLIENT.getClient(), OriginsEnum.FRONT_HOST.getClient()));
 
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS","DELETE"));
         configuration.setAllowCredentials(Boolean.TRUE);
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
 

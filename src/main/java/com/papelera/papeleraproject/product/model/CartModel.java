@@ -27,6 +27,10 @@ public class CartModel implements Serializable {
     private User userId;
     @Column(name = "CART_PRICE")
     private Double cartPrice;
+    @Column(name = "CART_PRODUCT_NAME")
+    private String cartProductName;
+    @Column(name = "CART_PRODUCT_QUANTITY")
+    private Integer cartProductQuantity;
 
 
 
